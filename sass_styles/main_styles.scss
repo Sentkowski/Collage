@@ -2,3 +2,16 @@
 $primary-color-1: #510CFF;
 $primary-color-2: #3D39FF;
 $primary-color-special: #DA01FF;
+
+// Typography
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@import 'sections';
+@import 'components';
+@import 'esthetics';

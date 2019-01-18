@@ -1,0 +1,30 @@
+.dot_line {
+    position: absolute;
+    z-index: -1;
+
+    &.vert {
+        top: 0%;
+        height: 100vh;
+
+        &.left {
+            left: 10%;
+        }
+
+        &.right {
+            right: 10%;
+        }
+    }
+
+    &.hor {
+        left: 0;
+        width: 100vw;
+
+        &.up {
+            top: 150px;
+        }
+
+        &.down {
+            top: 250px;
+        }
+    }
+}

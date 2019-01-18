@@ -1,0 +1,66 @@
+/* line 7, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* line 11, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.welcome_section {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.welcome_flag {
+  height: 12vh;
+  width: 80vw;
+  margin: 5vh 0;
+  background-image: url("../interface/name_flag.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line {
+  position: absolute;
+  z-index: -1;
+}
+
+/* line 5, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.vert {
+  top: 0%;
+  height: 100vh;
+}
+
+/* line 9, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.vert.left {
+  left: 10%;
+}
+
+/* line 13, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.vert.right {
+  right: 10%;
+}
+
+/* line 18, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.hor {
+  left: 0;
+  width: 100vw;
+}
+
+/* line 22, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.hor.up {
+  top: 150px;
+}
+
+/* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+.dot_line.hor.down {
+  top: 250px;
+}
+
+/*# sourceMappingURL=../styles/main_styles.map */
