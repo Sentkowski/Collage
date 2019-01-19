@@ -25,6 +25,103 @@ html {
   background-size: contain;
 }
 
+/* line 10, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.welcome_description {
+  position: relative;
+  left: 10%;
+  height: 15vh;
+  width: 80vw;
+}
+
+/* line 16, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.welcome_description p {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  color: #3D39FF;
+  padding: 0 24px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* line 28, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.benefit_box {
+  display: flex;
+  height: 8vh;
+  width: 70vw;
+  margin: 6vh auto;
+  border: 1px solid #510CFF;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+/* line 37, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.benefit_box .ben_text {
+  padding: 0 8px;
+  font-size: 18px;
+  text-align: center;
+  align-self: center;
+  color: #510CFF;
+  width: 57.5vw;
+}
+
+/* line 45, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.benefit_box .ben_text strong {
+  font-weight: bold;
+}
+
+/* line 51, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.ben_number {
+  position: relative;
+  background-color: #510CFF;
+  border-radius: inherit;
+  height: 8vh;
+  width: 12.5vw;
+  top: -1px;
+}
+
+/* line 59, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.ben_number.right {
+  left: 1px;
+}
+
+/* line 63, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.ben_number.left {
+  left: -1px;
+}
+
+/* line 67, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.ben_number .digit {
+  font-weight: bold;
+  font-size: 36px;
+  text-align: center;
+  color: white;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* line 78, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.welcome_button {
+  display: block;
+  border: none;
+  height: 8vh;
+  width: 65vw;
+  margin: 7vh auto;
+  background: #DA01FF;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+/* line 88, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.welcome_button p {
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .dot_line {
   position: absolute;
@@ -55,12 +152,12 @@ html {
 
 /* line 22, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .dot_line.hor.up {
-  top: 150px;
+  top: 22vh;
 }
 
 /* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .dot_line.hor.down {
-  top: 250px;
+  top: 37vh;
 }
 
 /*# sourceMappingURL=../styles/main_styles.map */

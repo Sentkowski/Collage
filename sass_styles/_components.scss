@@ -6,3 +6,89 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.welcome_description {
+    position: relative;
+    left: 10%;
+    height: 15vh;
+    width: 80vw;
+
+    p {
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        color: $primary-color-2;
+        padding: 0 24px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.benefit_box {
+    display: flex;
+    height: 8vh;
+    width: 70vw;
+    margin: 6vh auto;
+    border: 1px solid $primary-color-1;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    .ben_text {
+        padding: 0 8px;
+        font-size: 18px;
+        text-align: center;
+        align-self: center;
+        color: $primary-color-1;
+        width: 57.5vw;
+
+        strong {
+            font-weight: bold;
+        }
+    }
+}
+
+.ben_number {
+    position: relative;
+    background-color: $primary-color-1;
+    border-radius: inherit;
+    height: 8vh;
+    width: 12.5vw;
+    top: -1px;
+
+    &.right {
+        left: 1px;
+    }
+
+    &.left {
+        left: -1px;
+    }
+
+    .digit {
+        font-weight: bold;
+        font-size: 36px;
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.welcome_button {
+    display: block;
+    border: none;
+    height: 8vh;
+    width: 65vw;
+    margin: 7vh auto;
+    background: $primary-color-special;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    p {
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+    }
+}
