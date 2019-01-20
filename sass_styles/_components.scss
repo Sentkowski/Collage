@@ -1,7 +1,8 @@
 .welcome_flag {
-    height: 12vh;
-    width: 80vw;
-    margin: 5vh 0;
+    // IN ANIMATIONS
+    // height: 12vh;
+    // width: 80vw;
+    // margin: 5vh 0;
     background-image: url("../interface/name_flag.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -76,11 +77,14 @@
 }
 
 .welcome_button {
-    display: block;
+    position: absolute;
+    top: 85vh;
+    left: 50%;
+    transform: translateX(-50%);
     border: none;
     height: 8vh;
     width: 65vw;
-    margin: 7vh auto;
+    margin: auto;
     background: $primary-color-special;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -91,4 +95,60 @@
         font-size: 24px;
         text-align: center;
     }
+}
+
+.instruction_head {
+    margin: auto;
+    color: $primary-color-2;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+}
+
+.inst_step {
+    font-size: 18px;
+    color: $primary-color-2;
+
+    &:nth-of-type(2) {
+        margin-top: 8px;
+    }
+}
+
+li > .inst_step {
+    width: 60%;
+}
+
+.first_step {
+    margin-right: auto;
+}
+
+.inst_list {
+    margin: auto;
+    height: 65vh;
+    width: 90vw;
+// IN ANIMATIONS
+// display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.inst_block {
+    height: 13vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inst_plus {
+    width: 15vw;
+    height: 15vw;
+}
+
+.inst_rec {
+    width: 30vw;
+    height: 25vw;
+}
+
+.inst_circles {
+    width: 30vw;
+    height: 30vw;
 }

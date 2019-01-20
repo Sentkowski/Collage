@@ -6,29 +6,51 @@
     %link(rel="stylesheet" type="text/css" href="styles/reset.css")
     %link(href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet")
     %link(rel="stylesheet" type="text/css" href="styles/main_styles.css")
+    %script(src="javascript/jquery.js")
+    %script(src="javascript/my_scripts.js")
     %title Collage Cut
 
 %body
-    %section.welcome_section
-        %header.welcome_flag
-        %img.dot_line.vert.left(src="interface/line_vert.png")
-        %img.dot_line.right.vert(src="interface/line_vert.png")
-        %img.dot_line.up.hor(src="interface/line_hor.png")
-        %img.dot_line.down.hor(src="interface/line_hor.png")
-        %section.welcome_description
+    %section.main_section
+        %header.welcome_flag.to_shrink
+        %img.dot_line.vert.left.to_fade(src="interface/line_vert.png")
+        %img.dot_line.right.vert.to_fade(src="interface/line_vert.png")
+        %img.dot_line.up.hor.to_fade(src="interface/line_hor.png")
+        %img.dot_line.down.hor.to_slide_down(src="interface/line_hor.png")
+        %section.welcome_description.to_fade
             %p Put all your favorite photos together for free!
-        %ol
-            %li.benefit_box
+        %ol.to_fade
+            %li.benefit_box.to_fade
                 %div.ben_number.left
                     %p.digit 1
                 %p.ben_text Create <strong> your own </strong> layout
-            %li.benefit_box
+            %li.benefit_box.to_fade
                 %p.ben_text Choose the photos <strong> you love </strong>
                 %div.ben_number.right
                     %p.digit 2
-            %li.benefit_box
+            %li.benefit_box.to_fade
                 %div.ben_number.left
                     %p.digit 3
                 %p.ben_text Resize & rearrange <strong> as you wish </strong>
         %button.welcome_button
             %p Let's get started
+
+        / Here start the instructions
+        %section
+            %img.to_show.vert_arrow(src="interface/arrow_vert.png")
+            %img.to_show.hor_arrow(src="interface/arrow_hor.png")
+            %h2.to_show.instruction_head It's easy
+            %ul.to_show_flex.inst_list
+                %li.to_show_flex.inst_block
+                    %p.to_show.inst_step.first_step Swipe horizontally or vertically to split the canvas
+                %li.to_show_flex.inst_block
+                    %img.to_show.inst_plus(src="interface/plus.svg")
+                    %p.to_show.inst_step.right Use the plus icon to add your photo into a slot
+                %li.to_show_flex.inst_block
+                    %div.to_show
+                        %p.to_show.inst_step Double tap on a line to marge two photo slots
+                        %p.to_show.inst_step Or on a photo to replace it
+                    %img.to_show.inst_circles(src="interface/circles.svg")
+                %li.to_show_flex.inst_block
+                    %img.to_show.inst_rec(src="interface/rectangles.svg")
+                    %p.to_show.inst_step.right Move a photo in a slot to frame it

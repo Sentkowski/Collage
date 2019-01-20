@@ -23,8 +23,24 @@
             top: 22vh;
         }
 
-        &.down {
-            top: 37vh;
-        }
+        // IN ANIMATIONS
+        // &.down {
+        //     top: 37vh;
+        // }
     }
+}
+
+.vert_arrow {
+    position: absolute;
+    z-index: -1;
+    top: 0%;
+    height: 30vh;
+    right: 15%;
+}
+
+.hor_arrow {
+    position: absolute;
+    z-index: -1;
+    width: 40vw;
+    top: 30vh;
 }

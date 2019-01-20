@@ -1,0 +1,34 @@
+.to_fade {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.fade {
+    opacity: 0;
+}
+
+.to_slide_down {
+    top: 37vh;
+    transition: top 0.3s;
+}
+
+.slide_down {
+    top: 82vh;
+}
+
+.to_shrink {
+    height: 12vh;
+    width: 80vw;
+    margin: 5vh 0;
+    transition: height 0.3s, width 0.3s, margin 0.3s;
+}
+
+.shrink {
+    margin: 2.5vh 0 1.5vh 0;
+    height: 7vh;
+    width: 50vw;
+}
+
+.to_show, .to_show_flex {
+    display: none;
+}
