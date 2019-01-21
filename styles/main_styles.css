@@ -100,7 +100,7 @@ html {
 }
 
 /* line 79, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.welcome_button {
+.proceed_button {
   position: absolute;
   top: 85vh;
   left: 50%;
@@ -115,7 +115,7 @@ html {
 }
 
 /* line 92, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.welcome_button p {
+.proceed_button p {
   color: white;
   font-weight: bold;
   font-size: 24px;
@@ -239,7 +239,7 @@ li > .inst_step {
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_animations.scss */
 .to_fade {
   opacity: 1;
-  transition: opacity 0.2s;
+  transition: opacity 0.6s;
 }
 
 /* line 6, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_animations.scss */
