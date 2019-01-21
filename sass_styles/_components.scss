@@ -152,3 +152,78 @@ li > .inst_step {
     width: 30vw;
     height: 30vw;
 }
+
+.collage_section {
+    width: 90vw;
+    height: 85vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.collage_buttons_wrap {
+    margin-top: 5vh;
+    width: 90vw;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+        height: 7.5vh;
+        width: 40vw;
+        border-radius: 5px;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        font-size: 24px;
+        font-weight: bold;
+    }
+}
+
+.layouts_button {
+    color: $primary-color-1;
+    background-color: white;
+    border: 1px solid $primary-color-1;
+}
+
+.instructions_button {
+    border: none;
+    color: white;
+    background-color: $primary-color-1;
+}
+
+.collage_main_frame {
+    width: 85vw;
+    height: calc(85vw * 0.75);
+    background-color: rgba($primary-color-1, 0.25);
+}
+
+.aspect_wrapper {
+    margin-bottom: 5vh;
+    display: flex;
+    height: 10vh;
+    width: 60vw;
+    border: 1px solid $primary-color-1;
+    border-radius: 5px;
+
+    button {
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        color: $primary-color-1;
+        background-color: rgba(white, 0);
+        width: 50%;
+        height: 100%;
+    }
+
+    .aspect_name {
+        font-size: 24px;
+        text-align: center;
+        border-right: 1px solid $primary-color-1;
+    }
+
+    .aspect_numbers {
+        font-weight: bold;
+        font-size: 36px;
+        text-align: center;
+    }
+}
