@@ -154,10 +154,11 @@ li > .inst_step {
 }
 
 .collage_section {
+    opacity: 0;
     width: 90vw;
     height: 85vh;
     margin: auto;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;

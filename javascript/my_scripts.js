@@ -57,5 +57,7 @@ function hideInstructions() {
     .animate({opacity: 0}, 300, function() {
         $( ".instructions_section, .dot_line.down.hor, .proceed_button" )
         .css("display", "none");
-    });
+        $( ".collage_section" ).css("display", "flex");
+        $( ".collage_section" ).animate({opacity: 1}, 300);
+    })
 }

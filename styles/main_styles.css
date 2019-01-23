@@ -193,16 +193,17 @@ li > .inst_step {
 
 /* line 156, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_section {
+  opacity: 0;
   width: 90vw;
   height: 85vh;
   margin: auto;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
 
-/* line 166, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 167, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_buttons_wrap {
   margin-top: 5vh;
   width: 90vw;
@@ -210,7 +211,7 @@ li > .inst_step {
   justify-content: space-around;
 }
 
-/* line 172, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 173, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_buttons_wrap button {
   height: 7.5vh;
   width: 40vw;
@@ -220,28 +221,28 @@ li > .inst_step {
   font-weight: bold;
 }
 
-/* line 182, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 183, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .layouts_button {
   color: #510CFF;
   background-color: white;
   border: 1px solid #510CFF;
 }
 
-/* line 188, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 189, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .instructions_button {
   border: none;
   color: white;
   background-color: #510CFF;
 }
 
-/* line 194, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 195, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_main_frame {
   width: 85vw;
   height: calc(85vw * 0.75);
   background-color: rgba(81, 12, 255, 0.25);
 }
 
-/* line 200, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 201, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper {
   margin-bottom: 5vh;
   display: flex;
@@ -251,7 +252,7 @@ li > .inst_step {
   border-radius: 5px;
 }
 
-/* line 208, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 209, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper button {
   padding: 8px;
   border: none;
@@ -262,14 +263,14 @@ li > .inst_step {
   height: 100%;
 }
 
-/* line 218, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 219, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper .aspect_name {
   font-size: 24px;
   text-align: center;
   border-right: 1px solid #510CFF;
 }
 
-/* line 224, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 225, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper .aspect_numbers {
   font-weight: bold;
   font-size: 36px;
