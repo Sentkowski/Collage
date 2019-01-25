@@ -202,6 +202,7 @@ li > .inst_step {
     width: 85vw;
     height: calc(85vw * 0.75);
     background-color: rgba($primary-color-1, 0.25);
+    display: flex;
 }
 
 .aspect_wrapper {
@@ -232,5 +233,17 @@ li > .inst_step {
         font-weight: bold;
         font-size: 36px;
         text-align: center;
+    }
+}
+
+div[class^='collage_frame'], div[class*=' collage_frame'] {
+    position: relative;
+
+    &:nth-child(odd) {
+        background-color: $primary-color-special;
+    }
+
+    &:nth-child(even) {
+        background-color: $primary-color-2;
     }
 }

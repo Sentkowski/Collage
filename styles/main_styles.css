@@ -240,9 +240,10 @@ li > .inst_step {
   width: 85vw;
   height: calc(85vw * 0.75);
   background-color: rgba(81, 12, 255, 0.25);
+  display: flex;
 }
 
-/* line 207, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 208, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper {
   margin-bottom: 5vh;
   display: flex;
@@ -252,7 +253,7 @@ li > .inst_step {
   border-radius: 5px;
 }
 
-/* line 215, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 216, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper button {
   padding: 8px;
   border: none;
@@ -263,18 +264,33 @@ li > .inst_step {
   height: 100%;
 }
 
-/* line 225, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 226, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper .aspect_name {
   font-size: 24px;
   text-align: center;
   border-right: 1px solid #510CFF;
 }
 
-/* line 231, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 232, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .aspect_wrapper .aspect_numbers {
   font-weight: bold;
   font-size: 36px;
   text-align: center;
+}
+
+/* line 239, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+div[class^='collage_frame'], div[class*=' collage_frame'] {
+  position: relative;
+}
+
+/* line 242, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+div[class^='collage_frame']:nth-child(odd), div[class*=' collage_frame']:nth-child(odd) {
+  background-color: #DA01FF;
+}
+
+/* line 246, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+div[class^='collage_frame']:nth-child(even), div[class*=' collage_frame']:nth-child(even) {
+  background-color: #3D39FF;
 }
 
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
