@@ -16,6 +16,10 @@ button {
     box-sizing: border-box;
 }
 
+body {
+    overscroll-behavior: contain;
+}
+
 @import 'sections';
 @import 'components';
 @import 'esthetics';

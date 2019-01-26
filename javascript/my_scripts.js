@@ -111,6 +111,8 @@ var framePostion = null;
 
 var splitCounter = 0;
 
+var splitLines = [];
+
 function getTouches(evt) {
   return evt.touches;
 }
@@ -134,16 +136,18 @@ function handleTouchEnd(evt) {
         diffX = firstX - lastX;
         diffY = firstY - lastY;
 
-        console.log(firstX, lastX)
-
         if (Math.abs(diffX) > Math.abs(diffY)) {
             console.log("horizontal")
         } else {
-            initialCollageSplitVertical(firstX)
+            if (splitLines.length == 0) {
+                initialCollageSplitVertical(firstX)
+            } else {
+                verticalSplit(firstX)
+            }
         }
     }
 
-    /* reset values */
+    // reset values
     firstTouch = null;
     lastTouch = null;
 };
@@ -153,6 +157,15 @@ function getCollageFramePosition() {
 }
 
 function initialCollageSplitVertical(coordinateX) {
+
+    var splitLine = {
+        direction: "vertical",
+        coordinate: coordinateX,
+        leftFrameNumber: splitCounter,
+        rightFrameNumber: splitCounter + 1
+    }
+    splitLines.push(splitLine);
+
     for (var i = 0; i < 2; i++) {
 
         var markup = `
@@ -160,6 +173,8 @@ function initialCollageSplitVertical(coordinateX) {
         `
         $( ".collage_main_frame" ).append(markup);
         var className = ".collage_frame_" + splitCounter;
+
+        // Adjust the size with the right proportions
         if (i == 1) {
             frameWidth = $( ".collage_main_frame" ).width() - coordinateX + "px";
         } else {
@@ -168,8 +183,100 @@ function initialCollageSplitVertical(coordinateX) {
         $( className ).css({
             width: frameWidth,
             height: "100%",
+            backgroundColor: colorGen()
         })
 
         splitCounter++;
     }
+}
+
+function verticalSplit(coordinateX) {
+    // Find the right frame to split
+    var frameToSplit = {
+        frameNumber: null,
+        distance: null,
+        splitLineIndex: null
+    };
+    var lastFrame = {
+        frameNumber: null,
+        distance: null,
+        splitLineIndex: null
+    };
+    var splitToTheRight = false;
+    // Find the closest splitting line on the right. If not, get the last one
+    for (var i = 0; i < splitLines.length; i++) {
+        var distanceFromXToSplit = coordinateX - splitLines[i].coordinate;
+        // console.log(distanceFromXToSplit)
+        if (distanceFromXToSplit < 0 && (Math.abs(distanceFromXToSplit) < frameToSplit.distance || frameToSplit.distance === null)) {
+            frameToSplit.frameNumber = splitLines[i].leftFrameNumber;
+            frameToSplit.distance = Math.abs(distanceFromXToSplit);
+            frameToSplit.splitLineIndex = i;
+        } else if (distanceFromXToSplit > 0 && (distanceFromXToSplit < lastFrame.distance || lastFrame.distance === null)) {
+            lastFrame.distance = distanceFromXToSplit;
+            lastFrame.frameNumber = splitLines[i].rightFrameNumber;
+            lastFrame.splitLineIndex = i;
+        }
+    }
+    if (frameToSplit.frameNumber === null) {
+        frameToSplit = lastFrame;
+        splitToTheRight = true;
+    }
+
+    // Make space for the new slot
+    var classNameToSplit = ".collage_frame_" + frameToSplit.frameNumber;
+    var newWidth = $( classNameToSplit ).width() - frameToSplit.distance;
+    $( classNameToSplit ).css("width", newWidth);
+    // console.log(frameToSplit.frameNumber)
+
+    // Append the new slot between the splitting line and slot on left
+    // Or right, if it is after the last splitting line
+    splitCounter++;
+    var markup = `
+    <div class="collage_frame_${splitCounter}"></div>
+    `
+
+    if (splitToTheRight) {
+        $( classNameToSplit ).before(markup);
+    } else {
+        $( classNameToSplit ).after(markup);
+    }
+
+    var classNameToAppend = ".collage_frame_" + splitCounter;
+    $( classNameToAppend ).css({
+        width: frameToSplit.distance + "px",
+        height: "100%",
+        backgroundColor: colorGen()
+    });
+
+    // Add the new splitline
+    if (splitToTheRight) {
+        var splitLine = {
+            direction: "vertical",
+            coordinate: coordinateX,
+            leftFrameNumber: splitCounter,
+            rightFrameNumber: frameToSplit.frameNumber,
+        }
+    } else {
+        var splitLine = {
+            direction: "vertical",
+            coordinate: coordinateX,
+            leftFrameNumber: frameToSplit.frameNumber,
+            rightFrameNumber: splitCounter,
+        }
+    }
+    splitLines.push(splitLine);
+
+    // Update the neighbors
+    if (splitToTheRight) {
+        splitLines[frameToSplit.splitLineIndex].rightFrameNumber = splitCounter;
+    } else {
+        splitLines[frameToSplit.splitLineIndex].leftFrameNumber = splitCounter;
+    }
+}
+
+function colorGen() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return "rgb(" + r + "," + g + "," + b + ")";
 }

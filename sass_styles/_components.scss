@@ -247,3 +247,8 @@ div[class^='collage_frame'], div[class*=' collage_frame'] {
         background-color: $primary-color-2;
     }
 }
+
+.collage_main_frame {
+    overflow: auto;
+    overscroll-behavior-y: contain;
+}

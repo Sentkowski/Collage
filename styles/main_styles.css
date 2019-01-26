@@ -13,6 +13,11 @@ button {
   box-sizing: border-box;
 }
 
+/* line 19, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
+body {
+  overscroll-behavior: contain;
+}
+
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .welcome_flag {
   background-image: url("../interface/name_flag.svg");
@@ -291,6 +296,12 @@ div[class^='collage_frame']:nth-child(odd), div[class*=' collage_frame']:nth-chi
 /* line 246, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 div[class^='collage_frame']:nth-child(even), div[class*=' collage_frame']:nth-child(even) {
   background-color: #3D39FF;
+}
+
+/* line 251, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.collage_main_frame {
+  overflow: auto;
+  overscroll-behavior-y: contain;
 }
 
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
