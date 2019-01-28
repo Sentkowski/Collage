@@ -161,13 +161,13 @@ function initialCollageSplitVertical(coordinateX) {
     var splitLine = {
         direction: "vertical",
         coordinate: coordinateX,
-        leftFrameNumber: splitCounter,
-        rightFrameNumber: splitCounter + 1
+        leftFrameNumber: splitCounter + 1,
+        rightFrameNumber: splitCounter + 2
     }
     splitLines.push(splitLine);
 
     for (var i = 0; i < 2; i++) {
-
+        splitCounter++;
         var markup = `
         <div class="collage_frame_${splitCounter}"></div>
         `
@@ -185,8 +185,6 @@ function initialCollageSplitVertical(coordinateX) {
             height: "100%",
             backgroundColor: colorGen()
         })
-
-        splitCounter++;
     }
 }
 
@@ -206,7 +204,6 @@ function verticalSplit(coordinateX) {
     // Find the closest splitting line on the right. If not, get the last one
     for (var i = 0; i < splitLines.length; i++) {
         var distanceFromXToSplit = coordinateX - splitLines[i].coordinate;
-        // console.log(distanceFromXToSplit)
         if (distanceFromXToSplit < 0 && (Math.abs(distanceFromXToSplit) < frameToSplit.distance || frameToSplit.distance === null)) {
             frameToSplit.frameNumber = splitLines[i].leftFrameNumber;
             frameToSplit.distance = Math.abs(distanceFromXToSplit);
@@ -280,3 +277,55 @@ function colorGen() {
   const b = Math.floor(Math.random() * 256);
   return "rgb(" + r + "," + g + "," + b + ")";
 }
+
+// frames = [] {
+// 	index
+// 	markup
+// 	width
+// 	height
+// 	startPointX
+// 	startPointY
+// 	swipedThroughMe(swipe) {
+// 		determine if the swipe event goes through the frame
+// 	}
+// 	split(direction, howMuchToCut) {
+// 		make the frame shorter
+// 	}
+// 	append(where) {
+// 		insert the markup and style
+// 	}
+// }
+//
+// splitLines = [] {
+// 	index
+// 	startingPoint
+// 	length
+// 	direction
+// 	distanceToTap(location) {
+// 		return the index and the distance between tap and line
+// 	}
+// }
+//
+// onSwipe(swipeEvent) {
+// 	swipe = {
+// 		startPoint
+// 		endPoint
+// 		direction
+// 	}
+// 	split(swipe)
+// }
+//
+// split(swipe) (
+// 	for frame in frames
+// 		if frame.swipedThroughMe(swipe)
+// 			frame.split(direction, howMuchToCut)
+// 	create a new frame
+// 	frame.append
+// )
+//
+// onDoubleTap(location) {
+// 	for splitLine in splitLines
+// 		collect all distanceToTap
+// 	choose the smallest distanceToTap
+//
+// }
