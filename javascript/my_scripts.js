@@ -96,29 +96,52 @@ function hideCollage() {
 
 function showCollage() {
     $( ".collage_section" ).css("display", "flex");
-    $( ".collage_section" ).animate({opacity: 1}, 300, function() {
-        getCollageFramePosition();
-    });
+    $( ".collage_section" ).animate({opacity: 1}, 300);
 }
 
 
 // COLLAGE EDITING
 
-var firstTouch = null;
-var lastTouch = null;
-
-var framePostion = null;
-
-var splitCounter = 0;
-
-var splitLines = [];
-
-function getTouches(evt) {
-  return evt.touches;
+// Manage the coordinates
+var mainFrame = {
+    get coordinates() {
+        return $( ".collage_main_frame" ).position()
+    }
 }
 
+function coordinatesRelativeToMainFrame(x, y) {
+    return {
+        left: x - mainFrame.coordinates.left,
+        top: y - mainFrame.coordinates.top
+    }
+}
+
+
+// Collect the data about swipe
+var lastTouch = null;
+var swipe = {
+    startPoint: {
+        left: null,
+        top: null,
+    },
+    // Add the information about the driection and the end point
+    set swipeEnd(coordinates) {
+        this.endPoint = coordinates;
+        this.diffX = Math.abs(this.startPoint.left - this.endPoint.left);
+        this.diffY = Math.abs(this.startPoint.top - this.endPoint.top);
+        if (this.diffX > this.diffY) {
+            this.direction = "horizontal";
+        } else {
+            this.direction = "vertical";
+        }
+    }
+}
+
+// Handlers
 function handleTouchStart(evt) {
-    firstTouch = evt;
+    var left = evt.touches[0].clientX;
+    var top = evt.touches[0].clientY;
+    swipe.startPoint = coordinatesRelativeToMainFrame(left, top)
 }
 
 function handleTouchMove(evt) {
@@ -126,206 +149,63 @@ function handleTouchMove(evt) {
 }
 
 function handleTouchEnd(evt) {
-    if (lastTouch && framePostion) {
-        var firstX = firstTouch.touches[0].clientX - framePostion.left;
-        var firstY = firstTouch.touches[0].clientY - framePostion.top;
+    var left = lastTouch.touches[0].clientX;
+    var top = lastTouch.touches[0].clientY;
+    swipe.swipeEnd = coordinatesRelativeToMainFrame(left, top)
+}
 
-        var lastX = lastTouch.touches[0].clientX - framePostion.left;
-        var lastY = lastTouch.touches[0].clientY - framePostion.top;
+// Frames
+var frames = []
 
-        diffX = firstX - lastX;
-        diffY = firstY - lastY;
-
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            console.log("horizontal")
+// Initial frame covering the whole collage area
+frames[0] = {
+    index: 0,
+    className: ".collage_frame_" + this.index,
+    markup: `<div class="${this.className}"></div>`,
+    width: $( ".collage_main_frame" ).width(),
+    height: $( ".collage_main_frame" ).height(),
+    startPoint: mainFrame.position(),
+    swipedThrough: function(swipe) {
+        var parallelLineDistance, perpendicularLineDistance;
+        if (swipe.direction == "horizontal") {
+            parallelLineDistance = swipe.diffX
+            perpendicularLineDistance = swipe.diffY
         } else {
-            if (splitLines.length == 0) {
-                initialCollageSplitVertical(firstX)
-            } else {
-                verticalSplit(firstX)
-            }
+            parallelLineDistance = swipe.diffY
+            perpendicularLineDistance = swipe.diffX
         }
-    }
-
-    // reset values
-    firstTouch = null;
-    lastTouch = null;
-};
-
-function getCollageFramePosition() {
-    framePostion = $( ".collage_main_frame" ).position()
-}
-
-function initialCollageSplitVertical(coordinateX) {
-
-    var splitLine = {
-        direction: "vertical",
-        coordinate: coordinateX,
-        leftFrameNumber: splitCounter + 1,
-        rightFrameNumber: splitCounter + 2
-    }
-    splitLines.push(splitLine);
-
-    for (var i = 0; i < 2; i++) {
-        splitCounter++;
-        var markup = `
-        <div class="collage_frame_${splitCounter}"></div>
-        `
-        $( ".collage_main_frame" ).append(markup);
-        var className = ".collage_frame_" + splitCounter;
-
-        // Adjust the size with the right proportions
-        if (i == 1) {
-            frameWidth = $( ".collage_main_frame" ).width() - coordinateX + "px";
+        // See if the swipe is on the right level
+        if (!(this.startPoint.top < swipe.startPoint.top <
+                this.startPoint.top + this.height)) {
+            return false;
+        }
+        var swipeLength = swipe.diffX
+        var swipeBeginning = this.startPoint.left
+        // Take into account only the segment of line that starts on or after
+        // the frame
+        if (swipe.startPoint.left < this.startPoint.left) {
+            swipeLength -= (this.startPoint.left - swipe.startPoint.left);
+            swipeBeginning = this.startPoint.left
+        }
+        // See how far is the beginning of the segment from the end of the frame
+        var possibleDistance = this.startPoint.left + this.width - swipeBeginning;
+        if (possibleDistance < 0) {
+            return false;
+        }
+        // See how much of this length was covered by the swipe
+        var distanceLeftToCover = possibleDistance - swipeLength;
+        // See if the swipe went at least 50% through
+        if (distanceLeftToCover > 0.5 * this.width) {
+            return false;
         } else {
-            frameWidth = coordinateX + "px";
+            return true;
         }
-        $( className ).css({
-            width: frameWidth,
-            height: "100%",
-            backgroundColor: colorGen()
-        })
     }
 }
 
-function verticalSplit(coordinateX) {
-    // Find the right frame to split
-    var frameToSplit = {
-        frameNumber: null,
-        distance: null,
-        splitLineIndex: null
-    };
-    var lastFrame = {
-        frameNumber: null,
-        distance: null,
-        splitLineIndex: null
-    };
-    var splitToTheRight = false;
-    // Find the closest splitting line on the right. If not, get the last one
-    for (var i = 0; i < splitLines.length; i++) {
-        var distanceFromXToSplit = coordinateX - splitLines[i].coordinate;
-        if (distanceFromXToSplit < 0 && (Math.abs(distanceFromXToSplit) < frameToSplit.distance || frameToSplit.distance === null)) {
-            frameToSplit.frameNumber = splitLines[i].leftFrameNumber;
-            frameToSplit.distance = Math.abs(distanceFromXToSplit);
-            frameToSplit.splitLineIndex = i;
-        } else if (distanceFromXToSplit > 0 && (distanceFromXToSplit < lastFrame.distance || lastFrame.distance === null)) {
-            lastFrame.distance = distanceFromXToSplit;
-            lastFrame.frameNumber = splitLines[i].rightFrameNumber;
-            lastFrame.splitLineIndex = i;
-        }
-    }
-    if (frameToSplit.frameNumber === null) {
-        frameToSplit = lastFrame;
-        splitToTheRight = true;
-    }
-
-    // Make space for the new slot
-    var classNameToSplit = ".collage_frame_" + frameToSplit.frameNumber;
-    var newWidth = $( classNameToSplit ).width() - frameToSplit.distance;
-    $( classNameToSplit ).css("width", newWidth);
-    // console.log(frameToSplit.frameNumber)
-
-    // Append the new slot between the splitting line and slot on left
-    // Or right, if it is after the last splitting line
-    splitCounter++;
-    var markup = `
-    <div class="collage_frame_${splitCounter}"></div>
-    `
-
-    if (splitToTheRight) {
-        $( classNameToSplit ).before(markup);
-    } else {
-        $( classNameToSplit ).after(markup);
-    }
-
-    var classNameToAppend = ".collage_frame_" + splitCounter;
-    $( classNameToAppend ).css({
-        width: frameToSplit.distance + "px",
-        height: "100%",
-        backgroundColor: colorGen()
-    });
-
-    // Add the new splitline
-    if (splitToTheRight) {
-        var splitLine = {
-            direction: "vertical",
-            coordinate: coordinateX,
-            leftFrameNumber: splitCounter,
-            rightFrameNumber: frameToSplit.frameNumber,
-        }
-    } else {
-        var splitLine = {
-            direction: "vertical",
-            coordinate: coordinateX,
-            leftFrameNumber: frameToSplit.frameNumber,
-            rightFrameNumber: splitCounter,
-        }
-    }
-    splitLines.push(splitLine);
-
-    // Update the neighbors
-    if (splitToTheRight) {
-        splitLines[frameToSplit.splitLineIndex].rightFrameNumber = splitCounter;
-    } else {
-        splitLines[frameToSplit.splitLineIndex].leftFrameNumber = splitCounter;
-    }
-}
-
-function colorGen() {
+function RandomColorGen() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
   return "rgb(" + r + "," + g + "," + b + ")";
 }
-
-// frames = [] {
-// 	index
-// 	markup
-// 	width
-// 	height
-// 	startPointX
-// 	startPointY
-// 	swipedThroughMe(swipe) {
-// 		determine if the swipe event goes through the frame
-// 	}
-// 	split(direction, howMuchToCut) {
-// 		make the frame shorter
-// 	}
-// 	append(where) {
-// 		insert the markup and style
-// 	}
-// }
-//
-// splitLines = [] {
-// 	index
-// 	startingPoint
-// 	length
-// 	direction
-// 	distanceToTap(location) {
-// 		return the index and the distance between tap and line
-// 	}
-// }
-//
-// onSwipe(swipeEvent) {
-// 	swipe = {
-// 		startPoint
-// 		endPoint
-// 		direction
-// 	}
-// 	split(swipe)
-// }
-//
-// split(swipe) (
-// 	for frame in frames
-// 		if frame.swipedThroughMe(swipe)
-// 			frame.split(direction, howMuchToCut)
-// 	create a new frame
-// 	frame.append
-// )
-//
-// onDoubleTap(location) {
-// 	for splitLine in splitLines
-// 		collect all distanceToTap
-// 	choose the smallest distanceToTap
-//
-// }
