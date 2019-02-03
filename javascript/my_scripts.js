@@ -268,6 +268,7 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
+    lastTouch = null;
     var left = evt.touches[0].clientX;
     var top = evt.touches[0].clientY;
     swipe.startPoint = {
@@ -281,15 +282,17 @@ function handleTouchMove(evt) {
 }
 
 function handleTouchEnd(evt) {
-    var left = lastTouch.touches[0].clientX;
-    var top = lastTouch.touches[0].clientY;
-    swipe.swipeEnd = {
-        left: left,
-        top: top,
-    }
-    for (var i = 0; i < frames.length; i++) {
-        if (frames[i].swipedThrough(swipe)) {
-            frames[i].split(swipe);
+    if (lastTouch) {
+        var left = lastTouch.touches[0].clientX;
+        var top = lastTouch.touches[0].clientY;
+        swipe.swipeEnd = {
+            left: left,
+            top: top,
+        }
+        for (var i = 0; i < frames.length; i++) {
+            if (frames[i].swipedThrough(swipe)) {
+                frames[i].split(swipe);
+            }
         }
     }
 }
