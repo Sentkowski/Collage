@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function() {
 
     $( ".proceed_button" ).click(function() {
@@ -122,16 +123,22 @@ class Frame {
         this.color = RandomColorGen();
         this.startPoint = startPoint;
     }
-    append() {
-        $( ".collage_main_frame" ).append(this.markup)
+
+    update() {
         $( this.classSelector ).css({
             "position": "relative",
             "width": pixelify(this.width),
             "height": pixelify(this.height),
             "backgroundColor": this.color,
         });
+    }
+
+    append() {
+        $( ".collage_main_frame" ).append(this.markup)
+        this.update();
         frames[this.index] = this;
     }
+
     swipedThrough(swipe) {
         if (swipe.direction == "horizontal") {
             var swipeLength = swipe.diffX
@@ -151,19 +158,18 @@ class Frame {
             var frameParallelLength = this.height;
         }
         // See if the swipe is on the right level
-        if (!(framePerpendicularLevel < swipePerpendicularLevel <
-                framePerpendicularLevel + swipePerpendicularLevel)) {
+        if (!(framePerpendicularLevel < swipePerpendicularLevel &&
+                swipePerpendicularLevel <
+                (framePerpendicularLevel + framePerpendicularLength))) {
             return false;
         }
-        var swipeCountingBeginning;
+        var swipeCountingBeginning = swipeParallelLevel;
         // Take into account only the segment of line that starts on or after
         // the frame
         if (swipeParallelLevel < frameParallelLevel) {
-            console.log(swipeParallelLevel)
-            console.log(frameParallelLevel)
             swipeLength -= (frameParallelLevel - swipeParallelLevel);
+            swipeCountingBeginning = frameParallelLevel;
         }
-        swipeCountingBeginning = frameParallelLevel;
         // See how far is the beginning of the swipe segment from the end of the frame
         var possibleDistance = frameParallelLevel + frameParallelLength
                 - swipeCountingBeginning;
@@ -172,12 +178,22 @@ class Frame {
         }
         // See how much of this length was covered by the swipe
         var distanceLeftToCover = possibleDistance - swipeLength;
+        var distanceCovered = possibleDistance - distanceLeftToCover;
         // See if the swipe went at least 50% through
-        if (distanceLeftToCover > 0.5 * frameParallelLength) {
+        if (distanceCovered < 0.5 * frameParallelLength) {
             return false;
         } else {
             return true;
         }
+    }
+
+    cut(swipe) {
+        if (swipe.direction == "horizontal") {
+            this.height = swipe.startPoint.top - this.startPoint.top;
+        } else {
+            this.width = swipe.startPoint.left - this.startPoint.left;
+        }
+        this.update();
     }
 }
 
@@ -203,12 +219,12 @@ var swipe = {
 
 // Prepare the collage section
 function collageSetup() {
-    mainFrame = {width: $( ".collage_main_frame" ).width(),
+    let mainFrame = {width: $( ".collage_main_frame" ).width(),
             height: $( ".collage_main_frame" ).height(),
             startPoint: $( ".collage_main_frame" ).position()};
 
     // Initial frame covering the whole collage area
-    firstFrame = new Frame ($( ".collage_main_frame" ).width(),
+    let firstFrame = new Frame ($( ".collage_main_frame" ).width(),
             $( ".collage_main_frame" ).height(),
             $( ".collage_main_frame" ).position())
     firstFrame.append()
@@ -237,7 +253,9 @@ function handleTouchEnd(evt) {
         top: top,
     }
     for (var i = 0; i < frames.length; i++) {
-        console.log(frames[i].swipedThrough(swipe));
+        if (frames[i].swipedThrough(swipe)) {
+            frames[i].cut(swipe);
+        }
     }
 }
 
