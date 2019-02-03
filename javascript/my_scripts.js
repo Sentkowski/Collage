@@ -120,15 +120,17 @@ class Frame {
         this.markup = `<div class="${this.class}"></div>`;
         this.width = width;
         this.height = height;
-        this.color = RandomColorGen();
+        this.color = randomColorGen();
         this.startPoint = startPoint;
     }
 
     update() {
         $( this.classSelector ).css({
-            "position": "relative",
+            "position": "absolute",
             "width": pixelify(this.width),
             "height": pixelify(this.height),
+            "top": this.startPoint.top,
+            "left": this.startPoint.left,
             "backgroundColor": this.color,
         });
     }
@@ -141,59 +143,92 @@ class Frame {
 
     swipedThrough(swipe) {
         if (swipe.direction == "horizontal") {
-            var swipeLength = swipe.diffX
-            var swipePerpendicularLevel = swipe.startPoint.top;
-            var swipeParallelLevel = swipe.startPoint.left;
-            var framePerpendicularLevel = this.startPoint.top;
-            var framePerpendicularLength = this.height;
-            var frameParallelLevel = this.startPoint.left;
-            var frameParallelLength = this.width;
+
+            // 1. Make sure that swipe was on the right height
+            if (!betweenTheValues(this.startPoint.top,
+            this.startPoint.top + this.height, swipe.startPoint.top)) {
+                return false;
+            }
+
+            // 2. Choose from the beginning and end swipe points the closest one to
+            // to left and take it as swipe beginning
+            let swipeBeginning = (swipe.startPoint.left < swipe.endPoint.left)
+                    ? swipe.startPoint : swipe.endPoint;
+
+            // 3. If the swipe beginning is before the frame, move it at the cost
+            // of swipe length
+            let swipeLength = swipe.diffX;
+            if (swipeBeginning.left < this.startPoint.left) {
+                swipeLength -= this.startPoint.left - swipeBeginning.left;
+            }
+
+            // 4. If the swipe exceds the frame, count out the surplus
+            if (swipeBeginning.left + swipeLength >
+                    this.startPoint.left + this.width) {
+                swipeLength = (this.startPoint.left + this.width) - swipeBeginning.left;
+            }
+
+            // 5. See if the swipe covers more than 50% of frame's length
+            if (swipeLength > this.width * 0.5) {
+                return true;
+            } else {
+                return false;
+            }
+
         } else if (swipe.direction == "vertical") {
-            var swipeLength = swipe.diffY
-            var swipePerpendicularLevel = swipe.startPoint.left;
-            var swipeParallelLevel = swipe.startPoint.top;
-            var framePerpendicularLevel = this.startPoint.left;
-            var framePerpendicularLength = this.width;
-            var frameParallelLevel = this.startPoint.top;
-            var frameParallelLength = this.height;
-        }
-        // See if the swipe is on the right level
-        if (!(framePerpendicularLevel < swipePerpendicularLevel &&
-                swipePerpendicularLevel <
-                (framePerpendicularLevel + framePerpendicularLength))) {
-            return false;
-        }
-        var swipeCountingBeginning = swipeParallelLevel;
-        // Take into account only the segment of line that starts on or after
-        // the frame
-        if (swipeParallelLevel < frameParallelLevel) {
-            swipeLength -= (frameParallelLevel - swipeParallelLevel);
-            swipeCountingBeginning = frameParallelLevel;
-        }
-        // See how far is the beginning of the swipe segment from the end of the frame
-        var possibleDistance = frameParallelLevel + frameParallelLength
-                - swipeCountingBeginning;
-        if (possibleDistance < 0) {
-            return false;
-        }
-        // See how much of this length was covered by the swipe
-        var distanceLeftToCover = possibleDistance - swipeLength;
-        var distanceCovered = possibleDistance - distanceLeftToCover;
-        // See if the swipe went at least 50% through
-        if (distanceCovered < 0.5 * frameParallelLength) {
-            return false;
-        } else {
-            return true;
+            // Do the same procedure, only with different variables (e.g. width -> height)
+            // 1.
+            if (!betweenTheValues(this.startPoint.left,
+            this.startPoint.left + this.width, swipe.startPoint.left)) {
+                return false;
+            }
+
+            // 2.
+            let swipeBeginning = (swipe.startPoint.top < swipe.endPoint.top)
+                    ? swipe.startPoint : swipe.endPoint;
+
+            // 3.
+            let swipeLength = swipe.diffY;
+            if (swipeBeginning.top < this.startPoint.top) {
+                swipeLength -= this.startPoint.top - swipeBeginning.top;
+            }
+
+            // 4.
+            if (swipeBeginning.top + swipeLength >
+                    this.startPoint.top + this.height) {
+                swipeLength = (this.startPoint.top + this.height) - swipeBeginning.top;
+            }
+
+            // 5.
+            if (swipeLength > this.height * 0.5) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    cut(swipe) {
+    split(swipe) {
+        let newFrameWidth, newFrameHeight, newFrameStart;
         if (swipe.direction == "horizontal") {
+            newFrameHeight = this.startPoint.top + this.height - swipe.startPoint.top;
             this.height = swipe.startPoint.top - this.startPoint.top;
+            newFrameStart = {
+                top: this.startPoint.top + this.height,
+                left: this.startPoint.left
+            };
+            newFrameWidth = this.width;
         } else {
+            newFrameWidth = this.startPoint.left + this.width - swipe.startPoint.left;
             this.width = swipe.startPoint.left - this.startPoint.left;
+            newFrameStart = {
+                top: this.startPoint.top,
+                left: this.startPoint.left + this.width
+            };
+            newFrameHeight = this.height;
         }
         this.update();
+        new Frame(newFrameWidth, newFrameHeight, newFrameStart).append();
     }
 }
 
@@ -254,7 +289,7 @@ function handleTouchEnd(evt) {
     }
     for (var i = 0; i < frames.length; i++) {
         if (frames[i].swipedThrough(swipe)) {
-            frames[i].cut(swipe);
+            frames[i].split(swipe);
         }
     }
 }
@@ -266,9 +301,24 @@ function pixelify(num) {
     return num + "px"
 }
 
-function RandomColorGen() {
+function randomColorGen() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
   return "rgb(" + r + "," + g + "," + b + ")";
+}
+
+function bindAccordingToDirection(direction, horAlternatives, vertAlternatives) {
+    if (direction == "horizontal") {
+        return horAlternatives;
+    } else {
+        return vertAlternatives;
+    }
+}
+
+function betweenTheValues(min, max, testValue) {
+    if (testValue < max && testValue > min) {
+        return true;
+    }
+    return false;
 }
