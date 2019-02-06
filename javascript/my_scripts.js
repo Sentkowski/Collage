@@ -327,6 +327,7 @@ function handleTouchStart(evt) {
 
 function handleTouchMove(evt) {
     lastSwipeTouch = evt;
+    precedingTouch = null;
 }
 
 function handleTouchEnd(evt) {
