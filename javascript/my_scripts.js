@@ -124,6 +124,32 @@ class Frame {
         this.startPoint = startPoint;
     }
 
+    get sides() {
+        let top = {
+            startPoint: this.startPoint,
+            endPoint: movePoint(this.startPoint, this.width, "horizontal"),
+        }
+        let right = {
+            startPoint: top.endPoint,
+            endPoint: movePoint(top.endPoint, this.height, "vertical"),
+        }
+        let bottom = {
+            startPoint: movePoint(top.startPoint, this.height, "vertical"),
+            endPoint: right.endPoint,
+        }
+        let left = {
+            startPoint: this.startPoint,
+            endPoint: bottom.startPoint,
+        }
+        let sides = {
+            top: top,
+            right: right,
+            bottom: bottom,
+            left: left,
+        }
+        return sides;
+    }
+
     update() {
         $( this.classSelector ).css({
             "position": "absolute",
@@ -139,6 +165,11 @@ class Frame {
         $( ".collage_main_frame" ).append(this.markup)
         this.update();
         frames[this.index] = this;
+    }
+
+    delete() {
+        $( this.classSelector ).remove();
+        delete frames[this.index];
     }
 
     swipedThrough(swipe) {
@@ -233,12 +264,9 @@ class Frame {
 }
 
 // Collect the data about swipe
-var lastTouch = null;
+var precedingTouch;
+var lastSwipeTouch;
 var swipe = {
-    startPoint: {
-        left: null,
-        top: null,
-    },
     // Add the information about the driection and the end point
     set swipeEnd(coordinates) {
         this.endPoint = coordinates;
@@ -249,6 +277,11 @@ var swipe = {
         } else {
             this.direction = "vertical";
         }
+    },
+    set swipeStart(coordinates) {
+        // reset swipe
+        lastSwipeTouch = null;
+        this.startPoint = coordinates;
     }
 }
 
@@ -268,30 +301,47 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
-    lastTouch = null;
-    var left = evt.touches[0].clientX;
-    var top = evt.touches[0].clientY;
-    swipe.startPoint = {
-        left: left,
-        top: top,
+    if (precedingTouch) {
+        // Detect double tap
+        if (new Date().getTime() - precedingTouch.time < 500) {
+            // Check which borders were tapped
+            let targets = findMergeTargets(precedingTouch);
+            // See if they are of equal length
+            if (targets) {
+                if (mergeValidate(targets)) {
+                    merge(targets);
+                }
+            }
+        }
     }
+    precedingTouch = {
+        time: new Date().getTime(),
+        left: evt.touches[0].clientX,
+        top: evt.touches[0].clientY,
+    };
+    swipe.swipeStart = {
+        left: evt.touches[0].clientX,
+        top: evt.touches[0].clientY,
+    };
 }
 
 function handleTouchMove(evt) {
-    lastTouch = evt;
+    lastSwipeTouch = evt;
 }
 
 function handleTouchEnd(evt) {
-    if (lastTouch) {
-        var left = lastTouch.touches[0].clientX;
-        var top = lastTouch.touches[0].clientY;
+    if (lastSwipeTouch) {
+        var left = lastSwipeTouch.touches[0].clientX;
+        var top = lastSwipeTouch.touches[0].clientY;
         swipe.swipeEnd = {
             left: left,
             top: top,
         }
         for (var i = 0; i < frames.length; i++) {
-            if (frames[i].swipedThrough(swipe)) {
-                frames[i].split(swipe);
+            if (frames[i]) {
+                if (frames[i].swipedThrough(swipe)) {
+                    frames[i].split(swipe);
+                }
             }
         }
     }
@@ -324,4 +374,106 @@ function betweenTheValues(min, max, testValue) {
         return true;
     }
     return false;
+}
+
+function findMergeTargets(doubleTapPoint) {
+    let targets = [];
+    for (let frame of frames) {
+        if (frame) {
+            for (let side in frame.sides) {
+                if (pointOnLine(frame.sides[side], doubleTapPoint, 10)) {
+                    let target = {
+                        frame: frame,
+                        side: side,
+                    };
+                    targets.push(target);
+                }
+            }
+        }
+    }
+    if (targets.length != 2) {
+        return false;
+    } else {
+        return targets;
+    }
+}
+
+function movePoint(startPoint, length, direction) {
+    let endPointTop, endpointLeft;
+    if (direction === "horizontal") {
+        endPointTop = startPoint.top;
+        endpointLeft = startPoint.left + length;
+    } else {
+        endPointTop = startPoint.top + length;
+        endpointLeft = startPoint.left;
+    }
+    let endPoint = {
+        top: endPointTop,
+        left: endpointLeft
+    }
+    return endPoint;
+}
+
+function pointOnLine(line, point, tolerance) {
+    if (line.startPoint.top == line.endPoint.top) {
+        // Horizontal
+        if (Math.abs(line.startPoint.top - point.top) > tolerance) {
+            return false;
+        } else {
+            if (betweenTheValues(line.startPoint.left - tolerance,
+                    line.endPoint.left + tolerance, point.left)) {
+                return true;
+            }
+        }
+    } else {
+        // Vertical
+        if (Math.abs(line.startPoint.left - point.left) > tolerance) {
+            return false;
+        } else {
+            if (betweenTheValues(line.startPoint.top - tolerance,
+                    line.endPoint.top + tolerance, point.top)) {
+                return true;
+            }
+        }
+    }
+}
+
+function mergeValidate(targets) {
+    let firstFrame = targets[0].frame;
+    let firstSide = targets[0].side;
+    let secondFrame = targets[1].frame;
+    let secondSide = targets[1].side;
+    // Deep comparison to see if both sides are of equal length
+    for (let point in firstFrame.sides[firstSide]) {
+        for (let parameter in firstFrame.sides[firstSide][point]) {
+            if (!(firstFrame.sides[firstSide][point][parameter]
+                    === secondFrame.sides[secondSide][point][parameter])) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function merge(targets) {
+    let firstFrame = targets[0].frame;
+    let secondFrame = targets[1].frame;
+    let toExpand, toShrink;
+    // Always expand from left to right or from top to bottom
+    if (targets[0].side === "bottom" || targets[0].side === "right") {
+        toExpand = firstFrame;
+        toShrink = secondFrame;
+    } else {
+        toExpand = secondFrame;
+        toShrink = firstFrame;
+    }
+
+    if (targets[0].side === "bottom" || targets[0].side === "top") {
+        toExpand.height += toShrink.height;
+    } else {
+        toExpand.width += toShrink.width;
+    }
+
+    toShrink.delete();
+    toExpand.update();
 }
