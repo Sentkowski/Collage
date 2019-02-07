@@ -284,24 +284,47 @@ li > .inst_step {
 }
 
 /* line 239, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-div[class^='collage_frame'], div[class*=' collage_frame'] {
-  position: relative;
+.collage_frame img {
+  width: 100%;
+  height: 100%;
 }
 
-/* line 242, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-div[class^='collage_frame']:nth-child(odd), div[class*=' collage_frame']:nth-child(odd) {
-  background-color: #DA01FF;
-}
-
-/* line 246, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-div[class^='collage_frame']:nth-child(even), div[class*=' collage_frame']:nth-child(even) {
-  background-color: #3D39FF;
-}
-
-/* line 251, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 244, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_main_frame {
   overflow: auto;
   overscroll-behavior-y: contain;
+}
+
+/* line 250, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+[type="file"] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* line 261, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+[type="file"] + label {
+  position: absolute;
+  background-color: #3D39FF;
+  border-radius: 30px;
+  color: #DA01FF;
+  cursor: pointer;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  font-size: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */

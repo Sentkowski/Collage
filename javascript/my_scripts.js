@@ -116,8 +116,10 @@ class Frame {
         this.index = frameCounter;
         frameCounter++;
         this.class = "collage_frame_" + this.index;
+        this.inputID = "input_" + this.index;
         this.classSelector = "." + this.class;
-        this.markup = `<div class="${this.class}"></div>`;
+        this.inputIDSelector = "#" + this.inputID
+        this.markup = `<div class="${this.class} collage_frame"><input type="file" id="${this.inputID}" accept="image/gif, image/jpeg, image/png"><label for="${this.inputID}">+</label></div>`;
         this.width = width;
         this.height = height;
         this.color = randomColorGen();
@@ -165,6 +167,10 @@ class Frame {
         $( ".collage_main_frame" ).append(this.markup)
         this.update();
         frames[this.index] = this;
+        // Add photo upload handler
+        $( this.inputIDSelector ).change(function (evt) {
+            addPhoto(evt);
+        });
     }
 
     delete() {
@@ -349,6 +355,21 @@ function handleTouchEnd(evt) {
 }
 
 
+// Photo manipulation
+function addPhoto(evt) {
+    let file = evt.originalEvent.srcElement.files[0];
+    console.log(evt.originalEvent.srcElement)
+    let img = document.createElement("img");
+    let reader = new FileReader();
+    reader.onloadend = function() {
+         img.src = reader.result;
+    }
+    reader.readAsDataURL(file);
+    $(evt.originalEvent.srcElement).after(img);
+    $(evt.originalEvent.srcElement).siblings("label").remove();
+    evt.originalEvent.srcElement.remove();
+}
+
 // Helping functions
 
 function pixelify(num) {
@@ -359,7 +380,7 @@ function randomColorGen() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
-  return "rgb(" + r + "," + g + "," + b + ")";
+  return "rgba(" + r + "," + g + "," + b + ", 0.25)";
 }
 
 function bindAccordingToDirection(direction, horAlternatives, vertAlternatives) {
