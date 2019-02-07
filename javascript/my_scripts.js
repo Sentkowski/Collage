@@ -119,11 +119,13 @@ class Frame {
         this.inputID = "input_" + this.index;
         this.classSelector = "." + this.class;
         this.inputIDSelector = "#" + this.inputID
-        this.markup = `<div class="${this.class} collage_frame"><input type="file" id="${this.inputID}" accept="image/gif, image/jpeg, image/png"><label for="${this.inputID}">+</label></div>`;
+        this.markup = `<div class="${this.class} collage_frame">`;
+        this.inputMarkup = `<input type="file" id="${this.inputID}" accept="image/gif, image/jpeg, image/png"><label for="${this.inputID}">+</label></div>`
         this.width = width;
         this.height = height;
         this.color = randomColorGen();
         this.startPoint = startPoint;
+        this.hasPhoto = false;
     }
 
     get sides() {
@@ -164,10 +166,14 @@ class Frame {
     }
 
     append() {
-        $( ".collage_main_frame" ).append(this.markup)
+        $( ".collage_main_frame" ).append(this.markup);
         this.update();
         frames[this.index] = this;
-        // Add photo upload handler
+        this.appendInput();
+    }
+
+    appendInput() {
+        $( this.classSelector ).append(this.inputMarkup);
         $( this.inputIDSelector ).change(function (evt) {
             addPhoto(evt);
         });
@@ -245,6 +251,12 @@ class Frame {
         }
     }
 
+    clearPhoto() {
+        $( this.classSelector ).children().remove();
+        this.hasPhoto = false;
+        this.appendInput();
+    }
+
     split(swipe) {
         let newFrameWidth, newFrameHeight, newFrameStart;
         if (swipe.direction == "horizontal") {
@@ -307,6 +319,9 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
+    }
     if (precedingTouch) {
         // Detect double tap
         if (new Date().getTime() - precedingTouch.time < 500) {
@@ -317,6 +332,11 @@ function handleTouchStart(evt) {
                 if (mergeValidate(targets)) {
                     merge(targets);
                 }
+            } else {
+                // See if the double tap was on a photo
+                 if (tapOnPhotoDetection(precedingTouch)) {
+                     tapOnPhotoDetection(precedingTouch).clearPhoto();
+                 }
             }
         }
     }
@@ -334,9 +354,13 @@ function handleTouchStart(evt) {
 function handleTouchMove(evt) {
     lastSwipeTouch = evt;
     precedingTouch = null;
+    evt.preventDefault();
 }
 
 function handleTouchEnd(evt) {
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
+    }
     if (lastSwipeTouch) {
         var left = lastSwipeTouch.touches[0].clientX;
         var top = lastSwipeTouch.touches[0].clientY;
@@ -357,18 +381,42 @@ function handleTouchEnd(evt) {
 
 // Photo manipulation
 function addPhoto(evt) {
-    let file = evt.originalEvent.srcElement.files[0];
-    console.log(evt.originalEvent.srcElement)
+    let element = evt.originalEvent.srcElement;
+    let file = element.files[0];
     let img = document.createElement("img");
     let reader = new FileReader();
     reader.onloadend = function() {
+         $( img ).css("animation-play-state", "running")
          img.src = reader.result;
+         // Remove the spinner
+         $( img ).siblings().remove();
     }
     reader.readAsDataURL(file);
-    $(evt.originalEvent.srcElement).after(img);
-    $(evt.originalEvent.srcElement).siblings("label").remove();
-    evt.originalEvent.srcElement.remove();
+    $(element).after(img);
+    let loader = `<div class="loader_wrapper"><div class="loader"></div></div>`
+    $(element).after(loader);
+    frames[findElementsIndex(element)].hasPhoto = true;
+    // Remove the file input option
+    $(element).siblings("label").remove();
+    element.remove();
 }
+
+function tapOnPhotoDetection(doubleTapPoint) {
+    for (let frame of frames) {
+        if (frame && frame.hasPhoto) {
+            // Check if the double tap was on that frame
+            let onHeight = betweenTheValues(frame.startPoint.top,
+                frame.startPoint.top + frame.height, doubleTapPoint.top);
+            let onWidth = betweenTheValues(frame.startPoint.left,
+                frame.startPoint.left + frame.width, doubleTapPoint.left);
+            if (onHeight && onWidth) {
+                return frame;
+            }
+        }
+    }
+    return false;
+}
+
 
 // Helping functions
 
@@ -381,14 +429,6 @@ function randomColorGen() {
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
   return "rgba(" + r + "," + g + "," + b + ", 0.25)";
-}
-
-function bindAccordingToDirection(direction, horAlternatives, vertAlternatives) {
-    if (direction == "horizontal") {
-        return horAlternatives;
-    } else {
-        return vertAlternatives;
-    }
 }
 
 function betweenTheValues(min, max, testValue) {
@@ -498,4 +538,9 @@ function merge(targets) {
 
     toShrink.delete();
     toExpand.update();
+}
+
+function findElementsIndex(markup) {
+    let r = /\d+/;
+    return markup.outerHTML.match(r)[0];
 }
