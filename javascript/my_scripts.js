@@ -346,11 +346,15 @@ function handleTouchStart(evt) {
         left: evt.touches[0].clientX,
         top: evt.touches[0].clientY,
     };
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
+    }
 }
 
 function handleTouchMove(evt) {
     lastSwipeTouch = evt;
     precedingTouch = null;
+    evt.preventDefault();
 }
 
 function handleTouchEnd(evt) {
@@ -368,6 +372,9 @@ function handleTouchEnd(evt) {
                 }
             }
         }
+    }
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
     }
 }
 
