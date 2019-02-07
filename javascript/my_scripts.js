@@ -319,9 +319,6 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
-    if (evt.target.nodeName != "LABEL") {
-        evt.preventDefault();
-    }
     if (precedingTouch) {
         // Detect double tap
         if (new Date().getTime() - precedingTouch.time < 500) {
@@ -349,6 +346,9 @@ function handleTouchStart(evt) {
         left: evt.touches[0].clientX,
         top: evt.touches[0].clientY,
     };
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
+    }
 }
 
 function handleTouchMove(evt) {
@@ -358,9 +358,6 @@ function handleTouchMove(evt) {
 }
 
 function handleTouchEnd(evt) {
-    if (evt.target.nodeName != "LABEL") {
-        evt.preventDefault();
-    }
     if (lastSwipeTouch) {
         var left = lastSwipeTouch.touches[0].clientX;
         var top = lastSwipeTouch.touches[0].clientY;
@@ -375,6 +372,9 @@ function handleTouchEnd(evt) {
                 }
             }
         }
+    }
+    if (evt.target.nodeName != "LABEL") {
+        evt.preventDefault();
     }
 }
 
@@ -428,7 +428,7 @@ function randomColorGen() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
-  return "rgba(" + r + "," + g + "," + b + ", 0.25)";
+  return "rgba(" + r + "," + g + "," + b + ", 0.4)";
 }
 
 function betweenTheValues(min, max, testValue) {
