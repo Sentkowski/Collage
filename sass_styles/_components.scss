@@ -6,19 +6,21 @@
     background-image: url("../interface/name_flag.svg");
     background-repeat: no-repeat;
     background-size: contain;
+
+    @media #{$tablets} {
+        height: 8vh;
+    }
 }
 
-.main_section {
-    height: 78vh;
-    width: 100vw;
-    overflow: hidden;
-}
 
 .welcome_description {
-    position: relative;
-    left: 10%;
-    height: 15vh;
-    width: 80vw;
+    margin: auto;
+    height: 15%;
+    width: 80%;
+
+    @media #{$tablets} {
+        height: 20%;
+    }
 
     p {
         font-weight: bold;
@@ -29,14 +31,30 @@
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+
+        @media #{$tablets} {
+            font-size: 24px;
+        }
+    }
+}
+
+.benefit_list {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    justify-content: space-around;
+    padding: 0 15%;
+    margin-top: 5%;
+
+    @media #{$tablets} {
+        height: 80%;
+        padding: 0 5%;
     }
 }
 
 .benefit_box {
     display: flex;
-    height: 8vh;
-    width: 70vw;
-    margin: 6vh auto;
+    height: 15%;
     border: 1px solid $primary-color-1;
     box-sizing: border-box;
     border-radius: 5px;
@@ -47,7 +65,7 @@
         text-align: center;
         align-self: center;
         color: $primary-color-1;
-        width: 57.5vw;
+        width: 80%;
 
         strong {
             font-weight: bold;
@@ -59,8 +77,8 @@
     position: relative;
     background-color: $primary-color-1;
     border-radius: inherit;
-    height: 8vh;
-    width: 12.5vw;
+    height: 105%;
+    width: 20%;
     top: -1px;
 
     &.right {
@@ -101,6 +119,10 @@
         font-size: 24px;
         text-align: center;
     }
+
+    @media #{$tablets} {
+        display: none;
+    }
 }
 
 .instruction_head {
@@ -109,6 +131,10 @@
     font-weight: bold;
     font-size: 36px;
     text-align: center;
+
+    @media #{$tablets} {
+        height: 14%;
+    }
 }
 
 .inst_step {
@@ -125,13 +151,14 @@ li > .inst_step {
 }
 
 .first_step {
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .inst_list {
     margin: auto;
-    height: 65vh;
-    width: 90vw;
+    height: 95%;
+    width: 90%;
 // IN ANIMATIONS
 // display: flex;
     flex-direction: column;
@@ -139,9 +166,11 @@ li > .inst_step {
 }
 
 .inst_block {
-    height: 13vh;
-    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    height: 40%;
 }
 
 .inst_plus {
@@ -159,16 +188,6 @@ li > .inst_step {
     height: 30vw;
 }
 
-.collage_section {
-    opacity: 0;
-    width: 90vw;
-    height: 85vh;
-    margin: auto;
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
 
 .collage_buttons_wrap {
     margin-top: 5vh;

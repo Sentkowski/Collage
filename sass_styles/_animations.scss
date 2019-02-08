@@ -8,16 +8,16 @@
 }
 
 .to_shrink {
-    height: 12vh;
-    width: 80vw;
+    height: 12%;
+    width: 80%;
     margin: 5vh 0;
     transition: height 0.3s, width 0.3s, margin 0.3s;
 }
 
 .shrink {
     margin: 2.5vh 0 1.5vh 0;
-    height: 7vh;
-    width: 50vw;
+    height: 7%;
+    width: 50%;
 }
 
 .to_show, .to_show_flex {

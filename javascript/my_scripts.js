@@ -25,8 +25,10 @@ $(document).ready(function() {
 // ANIMATIONS
 
 function hideWelcome() {
-    $( ".main_section" ).animate({opacity: 0}, 300, function() {
-        $( ".main_section" ).remove();
+
+    $( ".side_menu" ).prepend( $(".welcome_flag") )
+    $( ".welcome_section" ).animate({opacity: 0}, 300, function() {
+        $( ".welcome_section" ).remove();
     });
 
     // Prepare to show the instructions
@@ -321,7 +323,7 @@ function collageSetup() {
 function handleTouchStart(evt) {
     if (precedingTouch) {
         // Detect double tap
-        if (new Date().getTime() - precedingTouch.time < 500) {
+        if (Date.now() - precedingTouch.time < 500) {
             // Check which borders were tapped
             let targets = findMergeTargets(precedingTouch);
             // See if they are of equal length
@@ -338,7 +340,7 @@ function handleTouchStart(evt) {
         }
     }
     precedingTouch = {
-        time: new Date().getTime(),
+        time: Date.now(),
         left: evt.touches[0].clientX,
         top: evt.touches[0].clientY,
     };
@@ -353,7 +355,6 @@ function handleTouchStart(evt) {
 
 function handleTouchMove(evt) {
     lastSwipeTouch = evt;
-    precedingTouch = null;
     evt.preventDefault();
 }
 

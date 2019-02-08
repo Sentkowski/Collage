@@ -1,1 +1,48 @@
+.page_wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
 
+.side_menu {
+    height: 100%;
+    width: 100%;
+
+    @media #{$tablets} {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-width: 320px;
+        width: 30%;
+    }
+}
+
+.welcome_section {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    @media #{$tablets} {
+        height: 55%;
+    }
+}
+
+.instructions_section {
+    height: 70%;
+    width: 100%;
+
+    @media #{$tablets} {
+        height: 40%;
+    }
+}
+
+.collage_section {
+    opacity: 0;
+    width: 90vw;
+    height: 85vh;
+    margin: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}

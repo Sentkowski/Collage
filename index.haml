@@ -11,58 +11,61 @@
     %title Collage Cut
 
 %body
-    %header.welcome_flag.to_shrink
-    %section.main_section
-        %img.dot_line.vert.left.to_fade(src="interface/line_vert.png")
-        %img.dot_line.right.vert.to_fade(src="interface/line_vert.png")
-        %img.dot_line.up.hor.to_fade(src="interface/line_hor.png")
-        %section.welcome_description.to_fade
-            %p Put all your favorite photos together for free!
-        %ol.to_fade
-            %li.benefit_box.to_fade
-                %div.ben_number.left
-                    %p.digit 1
-                %p.ben_text Create <strong> your own </strong> layout
-            %li.benefit_box.to_fade
-                %p.ben_text Choose the photos <strong> you love </strong>
-                %div.ben_number.right
-                    %p.digit 2
-            %li.benefit_box.to_fade
-                %div.ben_number.left
-                    %p.digit 3
-                %p.ben_text Resize & rearrange <strong> as you wish </strong>
+    %div.page_wrapper
+        %div.side_menu
+            %section.welcome_section
+                %header.welcome_flag.to_shrink
+                %img.dot_line.vert.left.to_fade(src="interface/line_vert.png")
+                %img.dot_line.right.vert.to_fade(src="interface/line_vert.png")
+                %img.dot_line.up.hor.to_fade(src="interface/line_hor.png")
+                %section.welcome_description.to_fade
+                    %p Put all your favorite photos together for free!
+                %ol.benefit_list.to_fade
+                    %li.benefit_box.to_fade
+                        %div.ben_number.left
+                            %p.digit 1
+                        %p.ben_text Create <strong> your own </strong> layout
+                    %li.benefit_box.to_fade
+                        %p.ben_text Choose the photos <strong> you love </strong>
+                        %div.ben_number.right
+                            %p.digit 2
+                    %li.benefit_box.to_fade
+                        %div.ben_number.left
+                            %p.digit 3
+                        %p.ben_text Resize & rearrange <strong> as you wish </strong>
 
 
-    %img.dot_line.down.hor.to_slide_down(src="interface/line_hor.png")
-    %button.proceed_button
-        %p.button_text Let's get started
-        
-    / Here start the instructions
-    %section.instructions_section
-        %img.to_show.vert_arrow(src="interface/arrow_vert.png")
-        %img.to_show.hor_arrow(src="interface/arrow_hor.png")
-        %h2.to_show.instruction_head It's easy
-        %ul.to_show_flex.inst_list
-            %li.to_show_flex.inst_block
-                %p.to_show.inst_step.first_step Swipe horizontally or vertically to split the canvas
-            %li.to_show_flex.inst_block
-                %img.to_show.inst_plus(src="interface/plus.svg")
-                %p.to_show.inst_step.right Use the plus icon to add your photo into a slot
-            %li.to_show_flex.inst_block
-                %div.to_show
-                    %p.to_show.inst_step Double tap on a line to marge two photo slots
-                    %p.to_show.inst_step Or on a photo to replace it
-                %img.to_show.inst_circles(src="interface/circles.svg")
-            %li.to_show_flex.inst_block
-                %img.to_show.inst_rec(src="interface/rectangles.svg")
-                %p.to_show.inst_step.right Move a photo in a slot to frame it
+            %img.dot_line.down.hor.to_slide_down(src="interface/line_hor.png")
+            %button.proceed_button
+                %p.button_text Let's get started
 
-    / Here is the collage creation section
-    %section.collage_section
-        %div.collage_buttons_wrap
-            %button.layouts_button Layouts
-            %button.instructions_button Instructions
-        %section.collage_main_frame
-        %div.aspect_wrapper
-            %button.aspect_name Aspect ratio
-            %button.aspect_numbers 4:3
+            / Here start the instructions
+            %section.instructions_section
+                %h2.to_show.instruction_head It's easy
+                %ul.to_show_flex.inst_list
+                    %li.to_show_flex.inst_block
+                        %p.to_show.inst_step.first_step
+                            Swipe horizontally or vertically to split the canvas
+                            %img.to_show.hor_arrow(src="interface/arrow_hor.png")
+                        %img.to_show.vert_arrow(src="interface/arrow_vert.png")
+                    %li.to_show_flex.inst_block
+                        %img.to_show.inst_plus(src="interface/plus.svg")
+                        %p.to_show.inst_step.right Use the plus icon to add your photo into a slot
+                    %li.to_show_flex.inst_block
+                        %div.to_show
+                            %p.to_show.inst_step Double tap on a line to marge two photo slots
+                            %p.to_show.inst_step Or on a photo to replace it
+                        %img.to_show.inst_circles(src="interface/circles.svg")
+                    %li.to_show_flex.inst_block
+                        %img.to_show.inst_rec(src="interface/rectangles.svg")
+                        %p.to_show.inst_step.right Move a photo in a slot to frame it
+
+        / Here is the collage creation section
+        %section.collage_section
+            %div.collage_buttons_wrap
+                %button.layouts_button Layouts
+                %button.instructions_button Instructions
+            %section.collage_main_frame
+            %div.aspect_wrapper
+                %button.aspect_name Aspect ratio
+                %button.aspect_numbers 4:3
