@@ -330,7 +330,6 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
-    console.log(evt)
     if (precedingTouch) {
         // Detect double tap
         if (Date.now() - precedingTouch.time < 500) {
