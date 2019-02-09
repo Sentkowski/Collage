@@ -12,6 +12,12 @@
     width: 80%;
     margin: 5vh 0;
     transition: height 0.3s, width 0.3s, margin 0.3s;
+
+    @media #{$tablets} {
+        height: 15%;
+        margin: 0;
+        width: 100%;
+    }
 }
 
 .shrink {
@@ -20,8 +26,22 @@
     width: 50%;
 }
 
-.to_show, .to_show_flex {
+.to_show {
     display: none;
+
+    @media #{$tablets} {
+        display: block;
+        opacity: 1;
+    }
+}
+
+.to_show_flex {
+    display: none;
+
+    @media #{$tablets} {
+        display: flex;
+        opacity: 1;
+    }
 }
 
 @keyframes appear {

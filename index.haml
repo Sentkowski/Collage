@@ -19,7 +19,7 @@
                 %img.dot_line.right.vert.to_fade(src="interface/line_vert.png")
                 %img.dot_line.up.hor.to_fade(src="interface/line_hor.png")
                 %section.welcome_description.to_fade
-                    %p Put all your favorite photos together for free!
+                    %h2 Put all your favorite photos together for free!
                 %ol.benefit_list.to_fade
                     %li.benefit_box.to_fade
                         %div.ben_number.left
@@ -40,13 +40,12 @@
                 %p.button_text Let's get started
 
             / Here start the instructions
-            %section.instructions_section
+            %section.instructions_section.to_show_flex
                 %h2.to_show.instruction_head It's easy
                 %ul.to_show_flex.inst_list
                     %li.to_show_flex.inst_block
                         %p.to_show.inst_step.first_step
                             Swipe horizontally or vertically to split the canvas
-                            %img.to_show.hor_arrow(src="interface/arrow_hor.png")
                         %img.to_show.vert_arrow(src="interface/arrow_vert.png")
                     %li.to_show_flex.inst_block
                         %img.to_show.inst_plus(src="interface/plus.svg")

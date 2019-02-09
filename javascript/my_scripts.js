@@ -18,6 +18,14 @@ $(document).ready(function() {
     $( ".collage_main_frame" )[0].addEventListener('touchstart', handleTouchStart);
     $( ".collage_main_frame" )[0].addEventListener('touchmove', handleTouchMove);
     $( ".collage_main_frame" )[0].addEventListener('touchend', handleTouchEnd);
+    $( ".collage_main_frame" )[0].addEventListener('mousedown', handleTouchStart);
+    $( ".collage_main_frame" )[0].addEventListener('mousemove', handleTouchMove);
+    $( ".collage_main_frame" )[0].addEventListener('mouseup', handleTouchEnd);
+
+    // Collage already displayed because of media queries
+    if($( window ).width() >= 640 && $( window ).height() >= 600) {
+        collageSetup();
+    }
 
 });
 
@@ -70,7 +78,7 @@ function showInstructions() {
         [elementsToShow[0], elementsToShow[1], elementsToShow[3]],
         [elementsToShow[4], elementsToShow[5]],
         [elementsToShow[6], elementsToShow[7], elementsToShow[8], elementsToShow[9]],
-        [elementsToShow[10], elementsToShow[11]],
+        [elementsToShow[10], elementsToShow[11], elementsToShow[12]],
         [$( ".proceed_button" )]
     ]
 
@@ -86,7 +94,7 @@ function showInstructions() {
 function hideInstructions() {
     $( ".instructions_section, .dot_line.down.hor, .proceed_button" )
     .animate({opacity: 0}, 300, function() {
-        $( ".instructions_section, .dot_line.down.hor, .proceed_button" )
+        $( ".instructions_section, .dot_line.down.hor, .proceed_button, .side_menu" )
         .css("display", "none");
     })
 }
@@ -98,6 +106,7 @@ function hideCollage() {
 }
 
 function showCollage() {
+    $( ".collage_section" ).before( $(".welcome_flag") );
     $( ".collage_section" ).css("display", "flex");
     $( ".collage_section" ).animate({opacity: 1}, 300, function () {
         collageSetup();
@@ -321,6 +330,7 @@ function collageSetup() {
 
 // Handlers
 function handleTouchStart(evt) {
+    console.log(evt)
     if (precedingTouch) {
         // Detect double tap
         if (Date.now() - precedingTouch.time < 500) {
@@ -341,13 +351,25 @@ function handleTouchStart(evt) {
     }
     precedingTouch = {
         time: Date.now(),
-        left: evt.touches[0].clientX,
-        top: evt.touches[0].clientY,
     };
-    swipe.swipeStart = {
-        left: evt.touches[0].clientX,
-        top: evt.touches[0].clientY,
-    };
+    if (evt.touches) {
+        // Touch
+        precedingTouch.left = evt.touches[0].clientX;
+        precedingTouch.top = evt.touches[0].clientY;
+        swipe.swipeStart = {
+            left: evt.touches[0].clientX,
+            top: evt.touches[0].clientY,
+        };
+    } else {
+        // Mouse
+        precedingTouch.left = evt.clientX;
+        precedingTouch.top = evt.clientY;
+        swipe.swipeStart = {
+            left: evt.clientX,
+            top: evt.clientY,
+        };
+    }
+
     if (evt.target.nodeName != "LABEL") {
         evt.preventDefault();
     }
@@ -360,8 +382,16 @@ function handleTouchMove(evt) {
 
 function handleTouchEnd(evt) {
     if (lastSwipeTouch) {
-        var left = lastSwipeTouch.touches[0].clientX;
-        var top = lastSwipeTouch.touches[0].clientY;
+        let top, left;
+        if (evt.touches) {
+            // Touch
+            left = lastSwipeTouch.touches[0].clientX;
+            top = lastSwipeTouch.touches[0].clientY;
+        } else {
+            // Mouse
+            left = evt.clientX;
+            top = evt.clientY;
+        }
         swipe.swipeEnd = {
             left: left,
             top: top,

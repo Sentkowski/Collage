@@ -16,6 +16,10 @@
 
         &.right {
             right: 10%;
+
+            @media #{$tablets} {
+                left: 320px;
+            }
         }
     }
 
@@ -41,6 +45,11 @@
     width: 15%;
     align-self: flex-end;
     height: 200%;
+
+    @media #{$tablets} {
+        width: 10%;
+        margin-right: 10%;
+    }
 }
 
 .hor_arrow {

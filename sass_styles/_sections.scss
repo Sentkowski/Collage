@@ -1,7 +1,13 @@
 .page_wrapper {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
+
+    @media #{$tablets} {
+        flex-direction: row;
+        justify-content: space-around;
+    }
 }
 
 .side_menu {
@@ -12,8 +18,8 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        min-width: 320px;
-        width: 30%;
+        flex-basis: 320px;
+        flex-grow: 0;
     }
 }
 
@@ -23,16 +29,23 @@
     overflow: hidden;
 
     @media #{$tablets} {
-        height: 55%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 }
 
 .instructions_section {
+    flex-direction: column;
     height: 70%;
     width: 100%;
 
     @media #{$tablets} {
-        height: 40%;
+        display: flex;
+        flex-direction: column;
+        height: 50vh;
+        justify-content: space-around;
     }
 }
 
@@ -45,4 +58,12 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
+    @media #{$tablets} {
+        opacity: 1;
+        display: flex;
+        flex-basis: 320px;
+        flex-grow: 1;
+        height: 100%;
+    }
 }
