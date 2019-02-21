@@ -29,7 +29,7 @@
     overflow: hidden;
 
     @media #{$tablets} {
-        height: 50vh;
+        height: 55vh;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -37,15 +37,20 @@
 }
 
 .instructions_section {
+    position: absolute;
+    top: 20%;
     flex-direction: column;
-    height: 70%;
-    width: 100%;
+    justify-content: space-around;
+    height: 50%;
+    margin: auto 5%;
+    padding: 5% 0;
+    border: 1px solid $primary-color-1;
+    border-radius: 10px;
 
     @media #{$tablets} {
+        position: static;
         display: flex;
-        flex-direction: column;
-        height: 50vh;
-        justify-content: space-around;
+        height: 40vh;
     }
 }
 

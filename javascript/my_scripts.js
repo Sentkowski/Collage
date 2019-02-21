@@ -36,16 +36,15 @@ function hideWelcome() {
 
     $( ".side_menu" ).prepend( $(".welcome_flag") )
     $( ".welcome_section" ).animate({opacity: 0}, 300, function() {
+        $( ".side_menu" ).prepend( $(" .to_slide_down ")).animate({opacity: 1}, 300);
+        $( ".to_slide_down" ).css({top: "82vh"});
         $( ".welcome_section" ).remove();
+        $( ".to_shrink" ).addClass( "shrink" );
     });
 
-    // Prepare to show the instructions
-    $( ".to_slide_down" ).addClass( "slide_down" );
-    $( ".to_shrink" ).addClass( "shrink" );
-
-    $( ".button_text" ).animate({opacity: 0}, 200, function() {
+    $( ".button_text" ).animate({opacity: 0}, 300, function() {
         $( ".button_text" ).text("Fair enough");
-        $( ".button_text" ).animate({opacity: 1}, 200, function() {
+        $( ".button_text" ).animate({opacity: 1}, 300, function() {
 
             // Activate the instructions -> collage button
             $( ".proceed_button" ).off().click(function() {

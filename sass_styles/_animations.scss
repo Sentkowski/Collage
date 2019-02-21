@@ -1,13 +1,9 @@
 .to_slide_down {
     top: 37vh;
-    transition: top 0.3s;
-}
-
-.slide_down {
-    top: 82vh;
 }
 
 .to_shrink {
+    will-change: height, margin, width;
     height: 12%;
     width: 80%;
     margin: 5vh 0;

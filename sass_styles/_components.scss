@@ -26,7 +26,7 @@
 
     h2 {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 3vh;
         text-align: center;
         color: $primary-color-2;
         padding: 0 24px;
@@ -35,7 +35,8 @@
         transform: translateY(-50%);
 
         @media #{$tablets} {
-            font-size: 18px;
+            font-size: 2.5vh;
+            padding: 0;
         }
     }
 }
@@ -57,7 +58,7 @@
 
 .benefit_box {
     display: flex;
-    height: 15%;
+    height: 20%;
     border: 1px solid $primary-color-1;
     box-sizing: border-box;
     border-radius: 5px;
@@ -68,7 +69,7 @@
 
     .ben_text {
         padding: 0 8px;
-        font-size: 18px;
+        font-size: 2.5vh;
         text-align: center;
         align-self: center;
         color: $primary-color-1;
@@ -84,7 +85,7 @@
     position: relative;
     background-color: $primary-color-1;
     border-radius: inherit;
-    height: 105%;
+    height: 102%;
     width: 20%;
     top: -1px;
 
@@ -123,7 +124,7 @@
     p {
         color: white;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 3vh;
         text-align: center;
     }
 
@@ -133,92 +134,40 @@
 }
 
 .instruction_head {
-    margin: auto;
     color: $primary-color-2;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 4vh;
     text-align: center;
+
+    @media #{$tablets} {
+        font-size: 3vh;
+    }
 }
 
 .inst_step {
-    font-size: 18px;
+    font-size: 3vh;
     color: $primary-color-2;
-
-    &:nth-of-type(2) {
-        margin-top: 8px;
-    }
-}
-
-li > .inst_step {
-    width: 60%;
+    width: 90%;
+    margin: auto;
 
     @media #{$tablets} {
-        width: 70%;
+        font-size: 2vh;
     }
-}
 
-.first_step {
-    display: flex;
-    flex-direction: column;
+    strong {
+        color: $primary-color-special;
+    }
 }
 
 .inst_list {
-    margin: auto;
-    height: 95%;
+    margin: 0 auto;
+    height: 70%;
     width: 90%;
 //  IN ANIMATIONS
 //  display: flex;
     flex-direction: column;
     justify-content: space-around;
-
-    @media #{$tablets} {
-        height: 80%;
-    }
 }
-
-.inst_block {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 40%;
-
-    @media #{$tablets} {
-        height: 20%;
-    }
-}
-
-.inst_plus {
-    width: 15vw;
-    height: 15vw;
-
-    @media #{$tablets} {
-        height: 75%;
-        width: auto;
-        margin-left: 5%;
-    }
-}
-
-.inst_rec {
-    width: 30vw;
-    height: 25vw;
-
-    @media #{$tablets} {
-        height: 75%;
-        width: 25%;
-    }
-}
-
-.inst_circles {
-    width: 30vw;
-    height: 30vw;
-
-    @media #{$tablets} {
-        height: 75%;
-        width: auto;
-    }
-}
-
 
 .collage_buttons_wrap {
     margin-top: 5vh;
@@ -236,11 +185,13 @@ li > .inst_step {
         width: 40vw;
         border-radius: 5px;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-        font-size: 24px;
+        font-size: 3vh;
         font-weight: bold;
 
         @media #{$tablets} {
             width: 40%;
+            min-width: 150px;
+            font-size: 2.5vh;
         }
     }
 }
@@ -283,6 +234,7 @@ li > .inst_step {
 
     @media #{$tablets} {
         width: 40%;
+        min-width: 250px;
         height: 7%;
         margin: 0;
     }
@@ -298,14 +250,14 @@ li > .inst_step {
     }
 
     .aspect_name {
-        font-size: 24px;
+        font-size: 2.5vh;
         text-align: center;
         border-right: 1px solid $primary-color-1;
     }
 
     .aspect_numbers {
         font-weight: bold;
-        font-size: 36px;
+        font-size: 4vh;
         text-align: center;
     }
 }
