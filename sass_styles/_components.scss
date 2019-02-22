@@ -85,7 +85,7 @@
     position: relative;
     background-color: $primary-color-1;
     border-radius: inherit;
-    height: 102%;
+    height: 103%;
     width: 20%;
     top: -1px;
 
@@ -262,10 +262,14 @@
     }
 }
 
-.collage_frame img {
-    width: 100%;
-    height: 100%;
-    animation: 1s ease-in-out 0s 1 paused appear;
+.collage_frame {
+    animation: appear 0.5s;
+
+    img {
+        width: 100%;
+        height: 100%;
+        animation: 1s ease-in-out 0s 1 paused appear;
+    }
 }
 
 .collage_main_frame {

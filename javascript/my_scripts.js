@@ -34,12 +34,15 @@ $(document).ready(function() {
 
 function hideWelcome() {
 
-    $( ".side_menu" ).prepend( $(".welcome_flag") )
     $( ".welcome_section" ).animate({opacity: 0}, 300, function() {
-        $( ".side_menu" ).prepend( $(" .to_slide_down ")).animate({opacity: 1}, 300);
+        $(".welcome_flag").css({opacity: 0, height: "7%", width: "50%", margin: "2.5vh 0 1.5vh 0"});
+        $(" .to_slide_down ").css({opacity: 0});
+        $( ".side_menu" ).prepend( $(" .to_slide_down "));
         $( ".to_slide_down" ).css({top: "82vh"});
+        $(" .to_slide_down ").animate({opacity: 1}, 300);
+        $( ".side_menu" ).prepend( $(".welcome_flag") );
         $( ".welcome_section" ).remove();
-        $( ".to_shrink" ).addClass( "shrink" );
+        $(".welcome_flag").animate({opacity: 1}, 300);
     });
 
     $( ".button_text" ).animate({opacity: 0}, 300, function() {
@@ -95,6 +98,7 @@ function hideInstructions() {
     .animate({opacity: 0}, 300, function() {
         $( ".instructions_section, .dot_line.down.hor, .proceed_button, .side_menu" )
         .css("display", "none");
+        $( ".collage_section" ).before( $(".welcome_flag") );
     })
 }
 
@@ -105,7 +109,6 @@ function hideCollage() {
 }
 
 function showCollage() {
-    $( ".collage_section" ).before( $(".welcome_flag") );
     $( ".collage_section" ).css("display", "flex");
     $( ".collage_section" ).animate({opacity: 1}, 300, function () {
         collageSetup();

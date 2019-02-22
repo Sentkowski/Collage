@@ -3,23 +3,15 @@
 }
 
 .to_shrink {
-    will-change: height, margin, width;
     height: 12%;
     width: 80%;
     margin: 5vh 0;
-    transition: height 0.3s, width 0.3s, margin 0.3s;
 
     @media #{$tablets} {
         height: 15%;
         margin: 0;
         width: 100%;
     }
-}
-
-.shrink {
-    margin: 2.5vh 0 1.5vh 0;
-    height: 7%;
-    width: 50%;
 }
 
 .to_show {
