@@ -140,6 +140,10 @@
     text-align: center;
 
     @media #{$tablets} {
+        font-size: 4vh;
+    }
+
+    @media #{$taller} {
         font-size: 3vh;
     }
 }
@@ -151,6 +155,10 @@
     margin: auto;
 
     @media #{$tablets} {
+        font-size: 2.5vh;
+    }
+
+    @media #{$taller} {
         font-size: 2vh;
     }
 
@@ -161,7 +169,7 @@
 
 .inst_list {
     margin: 0 auto;
-    height: 70%;
+    height: 75%;
     width: 90%;
 //  IN ANIMATIONS
 //  display: flex;

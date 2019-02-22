@@ -1,5 +1,6 @@
 "use strict";
 $(document).ready(function() {
+    start();
 
     $( ".proceed_button" ).click(function() {
         hideWelcome();
@@ -451,6 +452,12 @@ function tapOnPhotoDetection(doubleTapPoint) {
 
 
 // Helping functions
+
+function start() {
+  screen.orientation.lock("landscape").catch(e => {
+    console.log(e.message);
+});;
+}
 
 function pixelify(num) {
     return num + "px"
