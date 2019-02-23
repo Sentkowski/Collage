@@ -41,15 +41,15 @@
                 %p.button_text Let's get started
 
             / Here start the instructions
-            %section.instructions_section.to_show_flex
-                %h2.to_show.instruction_head It's easy
-                %ul.to_show_flex.inst_list
-                    %li.to_show_flex.inst_block
-                        %p.to_show.inst_step <strong> Swipe </strong> horizontally or vertically to split the canvas.
-                    %li.to_show_flex.inst_block
-                        %p.to_show.inst_step <strong> Tap </strong> on the plus icon to add your photo into a slot.
-                    %li.to_show_flex.inst_block
-                        %p.to_show.inst_step <strong> Double tap </strong> on a line to marge two photo slots or on a photo to replace it.
+            %section.instructions_section
+                %h2.instruction_head It's easy
+                %ul.inst_list
+                    %li
+                        %p.inst_step <strong> Swipe </strong> horizontally or vertically to split the canvas.
+                    %li
+                        %p.inst_step <strong> Tap </strong> on the plus icon to add your photo into a slot.
+                    %li
+                        %p.inst_step <strong> Double tap </strong> on a line to marge two photo slots or on a photo to replace it.
 
         / Here is the collage creation section
         %section.collage_section
@@ -60,3 +60,6 @@
             %div.aspect_wrapper
                 %button.aspect_name Aspect ratio
                 %button.aspect_numbers 4:3
+
+    %div.orientation_message
+        %p For the best experience, change to portrait mode.

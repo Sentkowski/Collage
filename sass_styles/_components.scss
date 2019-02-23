@@ -171,20 +171,17 @@
     margin: 0 auto;
     height: 75%;
     width: 90%;
-//  IN ANIMATIONS
-//  display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
 .collage_buttons_wrap {
-    margin-top: 5vh;
     width: 90vw;
     display: flex;
     justify-content: space-around;
 
     @media #{$tablets} {
-        margin: 0;
         width: 50%;
     }
 
@@ -225,6 +222,8 @@
     height: calc(85vw * 0.75);
     background-color: rgba($primary-color-1, 0.25);
     display: flex;
+    overflow: auto;
+    overscroll-behavior-y: contain;
 
     @media #{$tablets} {
         width: 50vw;
@@ -233,7 +232,6 @@
 }
 
 .aspect_wrapper {
-    margin-bottom: 5vh;
     display: flex;
     height: 10vh;
     width: 60vw;
@@ -278,11 +276,6 @@
         height: 100%;
         animation: 1s ease-in-out 0s 1 paused appear;
     }
-}
-
-.collage_main_frame {
-    overflow: auto;
-    overscroll-behavior-y: contain;
 }
 
 // Styled according to https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/

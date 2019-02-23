@@ -1,6 +1,5 @@
 "use strict";
 $(document).ready(function() {
-    start();
 
     $( ".proceed_button" ).click(function() {
         hideWelcome();
@@ -34,7 +33,7 @@ $(document).ready(function() {
 // ANIMATIONS
 
 function hideWelcome() {
-
+    $( ".proceed_button" ).off()
     $( ".welcome_section" ).animate({opacity: 0}, 300, function() {
         $(".welcome_flag").css({opacity: 0, height: "7%", width: "50%", margin: "2.5vh 0 1.5vh 0"});
         $(" .to_slide_down ").css({opacity: 0});
@@ -49,49 +48,21 @@ function hideWelcome() {
     $( ".button_text" ).animate({opacity: 0}, 300, function() {
         $( ".button_text" ).text("Fair enough");
         $( ".button_text" ).animate({opacity: 1}, 300, function() {
-
             // Activate the instructions -> collage button
-            $( ".proceed_button" ).off().click(function() {
+            $( ".proceed_button" ).click(function() {
                 hideInstructions();
                 setTimeout(function() {
                     showCollage();
                 }, 300);
-
             });
         });
     });
 };
 
 function showInstructions() {
-
-    $( ".instructions_section" ).css({opacity: 1, display: "block"});
-    $( ".proceed_button" ).css("display", "block");
-
-    $( ".to_show" ).css("opacity", "0");
-
-    $( ".to_show" ).css("display", "block");
-    $( ".to_show_flex" ).css("display", "flex");
-
-
-    var elementsToShow = $( ".to_show" )
-
-    // Gradually show the instruction steps
-    var elementsSequence = [
-        [elementsToShow[2]],
-        [elementsToShow[0], elementsToShow[1], elementsToShow[3]],
-        [elementsToShow[4], elementsToShow[5]],
-        [elementsToShow[6], elementsToShow[7], elementsToShow[8], elementsToShow[9]],
-        [elementsToShow[10], elementsToShow[11], elementsToShow[12]],
-        [$( ".proceed_button" )]
-    ]
-
-    for (let i = 0; i < elementsSequence.length; i++) {
-        for (let j = 0; j < elementsSequence[i].length; j++) {
-            setTimeout(() => {
-                $(elementsSequence[i][j]).animate({opacity: 1}, 300)
-            }, i * 50)
-        }
-    }
+    $( ".instructions_section, .side_menu" ).css({display: "flex"});
+    $( ".dot_line.down.hor, .proceed_button" ).css({display: "block"});
+    $( ".instructions_section, .side_menu, .dot_line.down.hor, .proceed_button" ).animate({opacity: 1});
 }
 
 function hideInstructions() {
@@ -105,6 +76,7 @@ function hideInstructions() {
 
 function hideCollage() {
     $( ".collage_section" ).animate({opacity: 0}, 300, function () {
+        $( ".side_menu" ).prepend( $( ".welcome_flag" ));
         $( ".collage_section" ).css("display", "none");
     });
 }
@@ -112,7 +84,9 @@ function hideCollage() {
 function showCollage() {
     $( ".collage_section" ).css("display", "flex");
     $( ".collage_section" ).animate({opacity: 1}, 300, function () {
-        collageSetup();
+        if (frameCounter === 0) {
+            collageSetup();
+        }
     });
 }
 
@@ -319,6 +293,7 @@ var swipe = {
 
 // Prepare the collage section
 function collageSetup() {
+
     let mainFrame = {width: $( ".collage_main_frame" ).width(),
             height: $( ".collage_main_frame" ).height(),
             startPoint: $( ".collage_main_frame" ).position()};
@@ -330,6 +305,45 @@ function collageSetup() {
     firstFrame.append()
 }
 
+// Define the main collage frame size depending on a given ratio
+function determineMainFrameSize(aspectX, aspectY) {
+    let maxWidth, maxHeight;
+
+    // See how much free space there is
+    if ($(window).width() < 640 || $(window).height() < 600) {
+        // Mobile
+        maxWidth = $(window).width() * 0.85;
+        maxHeight = $(window).height() * 0.65;
+        console.log("git")
+    } else {
+        // Tablets and bigger
+        maxWidth = $(window).width() - 360;
+        maxHeight = $(window).height() * 0.75;
+    }
+
+    let howManyTimes, newX, newY;
+    if (aspectX > aspectY) {
+        howManyTimes = Math.floor(maxWidth / aspectX);
+        // Make sure the frame fits from both sides
+        while (howManyTimes * aspectY > maxHeight) {
+            howManyTimes--;
+        }
+    } else {
+        howManyTimes = Math.floor(maxHeight / aspectY);
+        while (howManyTimes * aspectX > maxWidth) {
+            howManyTimes--;
+        }
+    }
+    return {width: aspectX * howManyTimes,
+            height: aspectY * howManyTimes};
+}
+
+// Clean the collage
+function collageClean() {
+    frames = [];
+    frameCounter = 0;
+    $( ".collage_frame" ).remove();
+}
 
 // Handlers
 function handleTouchStart(evt) {
@@ -453,11 +467,6 @@ function tapOnPhotoDetection(doubleTapPoint) {
 
 // Helping functions
 
-function start() {
-  screen.orientation.lock("landscape").catch(e => {
-    console.log(e.message);
-});;
-}
 
 function pixelify(num) {
     return num + "px"

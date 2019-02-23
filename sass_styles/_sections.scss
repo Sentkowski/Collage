@@ -8,6 +8,10 @@
         flex-direction: row;
         justify-content: space-around;
     }
+
+    @media #{$phoneLandscape} {
+        display: none;
+    }
 }
 
 .side_menu {
@@ -39,6 +43,9 @@
 .instructions_section {
     position: absolute;
     top: 15%;
+    // Revealed by JS
+    display: none;
+    opacity: 0;
     flex-direction: column;
     justify-content: space-around;
     height: 60%;
@@ -51,6 +58,7 @@
         position: static;
         display: flex;
         height: 40vh;
+        opacity: 1;
     }
 }
 
@@ -70,5 +78,25 @@
         flex-basis: 320px;
         flex-grow: 1;
         height: 100%;
+    }
+}
+
+.orientation_message {
+    display: none;
+
+    @media #{$phoneLandscape} {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $primary-color-1;
+        color: $primary-color-special;
+        font-size: 5vh;
     }
 }

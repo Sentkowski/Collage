@@ -14,24 +14,6 @@
     }
 }
 
-.to_show {
-    display: none;
-
-    @media #{$tablets} {
-        display: block;
-        opacity: 1;
-    }
-}
-
-.to_show_flex {
-    display: none;
-
-    @media #{$tablets} {
-        display: flex;
-        opacity: 1;
-    }
-}
-
 @keyframes appear {
     0% {
         opacity: 0;
