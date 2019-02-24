@@ -162,8 +162,10 @@ class Frame {
 
     appendInput() {
         $( this.classSelector ).append(this.inputMarkup);
-        $( this.inputIDSelector ).change(function (evt) {
-            addPhoto(evt);
+        $( this.classSelector ).children().animate({opacity: 1}, 300, () => {
+            $( this.inputIDSelector ).change(function (evt) {
+                addPhoto(evt);
+            });
         });
     }
 
@@ -240,9 +242,14 @@ class Frame {
     }
 
     clearPhoto() {
-        $( this.classSelector ).children().remove();
-        this.hasPhoto = false;
-        this.appendInput();
+        removeFrameHandlers();
+        $( this.classSelector ).children().css({opacity: 1});
+        $( this.classSelector ).children().animate({opacity: 0}, 300, () => {
+            $( this.classSelector ).children().remove();
+            this.hasPhoto = false;
+            this.appendInput();
+            appendFrameHandlers();
+        });
     }
 
     split(swipe) {
@@ -287,7 +294,11 @@ var swipe = {
     set swipeStart(coordinates) {
         // reset swipe
         lastSwipeTouch = null;
-        this.startPoint = coordinates;
+        if (coordinates === 0) {
+            this.startPoint = null;
+        } else {
+            this.startPoint = coordinates;
+        }
     }
 }
 
@@ -386,7 +397,7 @@ function handleTouchStart(evt) {
     precedingTouch = {
         time: Date.now(),
     };
-    if (evt.touches) {
+    if (evt.touches && evt.target.nodeName != "LABEL") {
         // Touch
         precedingTouch.left = evt.touches[0].clientX;
         precedingTouch.top = evt.touches[0].clientY;
@@ -394,7 +405,7 @@ function handleTouchStart(evt) {
             left: evt.touches[0].clientX,
             top: evt.touches[0].clientY,
         };
-    } else {
+    } else if (evt.target.nodeName != "LABEL") {
         // Mouse
         precedingTouch.left = evt.clientX;
         precedingTouch.top = evt.clientY;
@@ -406,6 +417,8 @@ function handleTouchStart(evt) {
 
     if (evt.target.nodeName != "LABEL") {
         evt.preventDefault();
+    } else {
+        swipe.swipeStart = 0;
     }
 }
 
@@ -415,7 +428,7 @@ function handleTouchMove(evt) {
 }
 
 function handleTouchEnd(evt) {
-    if (lastSwipeTouch) {
+    if (lastSwipeTouch && swipe.startPoint) {
         let top, left;
         if (evt.touches) {
             // Touch
