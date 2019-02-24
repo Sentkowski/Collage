@@ -64,13 +64,20 @@
 <!-- Here is the collage creation section -->
 <section class='collage_section'>
 <div class='collage_buttons_wrap'>
-<button class='layouts_button'>Layouts</button>
+<button class='reset_button'>Reset</button>
 <button class='instructions_button'>Instructions</button>
 </div>
 <section class='collage_main_frame'></section>
 <div class='aspect_wrapper'>
-<button class='aspect_name'>Aspect ratio</button>
-<button class='aspect_numbers'>4:3</button>
+<label class='aspect_name' for='aspect_ratio'>Aspect ratio</label>
+<select class='aspect_numbers' id='aspect_ratio'>
+<option>16:9</option>
+<option>3:2</option>
+<option selected>4:3</option>
+<option>1:1</option>
+<option>2:3</option>
+<option>9:16</option>
+</select>
 </div>
 </section>
 </div>

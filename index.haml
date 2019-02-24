@@ -54,12 +54,18 @@
         / Here is the collage creation section
         %section.collage_section
             %div.collage_buttons_wrap
-                %button.layouts_button Layouts
+                %button.reset_button Reset
                 %button.instructions_button Instructions
             %section.collage_main_frame
             %div.aspect_wrapper
-                %button.aspect_name Aspect ratio
-                %button.aspect_numbers 4:3
+                %label.aspect_name(for="aspect_ratio") Aspect ratio
+                %select.aspect_numbers#aspect_ratio
+                    %option 16:9
+                    %option 3:2
+                    %option(selected) 4:3
+                    %option 1:1
+                    %option 2:3
+                    %option 9:16
 
     %div.orientation_message
         %p For the best experience, change to portrait mode.

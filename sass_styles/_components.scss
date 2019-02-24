@@ -201,7 +201,7 @@
     }
 }
 
-.layouts_button {
+.reset_button {
     color: $primary-color-1;
     background-color: white;
     border: 1px solid $primary-color-1;
@@ -245,31 +245,41 @@
         margin: 0;
     }
 
-    button {
+    .aspect_name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 8px;
+        border-radius: 5px;
+        color: $primary-color-1;
+        width: 50%;
+        height: 100%;
+        font-size: 2.5vh;
+        text-align: center;
+        border: none;
+        border-right: 1px solid $primary-color-1;
+        background-color: rgba(white, 0);
+    }
+
+    .aspect_numbers {
         border: none;
         border-radius: 5px;
         color: $primary-color-1;
         background-color: rgba(white, 0);
-        width: 50%;
+        margin: auto;
         height: 100%;
-    }
-
-    .aspect_name {
-        font-size: 2.5vh;
-        text-align: center;
-        border-right: 1px solid $primary-color-1;
-    }
-
-    .aspect_numbers {
         font-weight: bold;
         font-size: 4vh;
         text-align: center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 }
 
 .collage_frame {
     animation: appear 0.5s;
+    cursor: crosshair;
 
     img {
         width: 100%;

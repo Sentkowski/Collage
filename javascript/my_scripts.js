@@ -15,17 +15,17 @@ $(document).ready(function() {
         }, 300);
     });
 
-    $( ".collage_main_frame" )[0].addEventListener('touchstart', handleTouchStart);
-    $( ".collage_main_frame" )[0].addEventListener('touchmove', handleTouchMove);
-    $( ".collage_main_frame" )[0].addEventListener('touchend', handleTouchEnd);
-    $( ".collage_main_frame" )[0].addEventListener('mousedown', handleTouchStart);
-    $( ".collage_main_frame" )[0].addEventListener('mousemove', handleTouchMove);
-    $( ".collage_main_frame" )[0].addEventListener('mouseup', handleTouchEnd);
+    appendFrameHandlers();
+
+    $( ".aspect_numbers" )[0].addEventListener('change', handleAspectChange);
+    $( ".reset_button" )[0].addEventListener('click', handleReset);
 
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
         collageSetup();
     }
+
+
 
 });
 
@@ -313,8 +313,7 @@ function determineMainFrameSize(aspectX, aspectY) {
     if ($(window).width() < 640 || $(window).height() < 600) {
         // Mobile
         maxWidth = $(window).width() * 0.85;
-        maxHeight = $(window).height() * 0.65;
-        console.log("git")
+        maxHeight = $(window).height() * 0.60;
     } else {
         // Tablets and bigger
         maxWidth = $(window).width() - 360;
@@ -346,6 +345,25 @@ function collageClean() {
 }
 
 // Handlers
+
+function appendFrameHandlers() {
+    $( ".collage_main_frame" )[0].addEventListener('touchstart', handleTouchStart);
+    $( ".collage_main_frame" )[0].addEventListener('touchmove', handleTouchMove);
+    $( ".collage_main_frame" )[0].addEventListener('touchend', handleTouchEnd);
+    $( ".collage_main_frame" )[0].addEventListener('mousedown', handleTouchStart);
+    $( ".collage_main_frame" )[0].addEventListener('mousemove', handleTouchMove);
+    $( ".collage_main_frame" )[0].addEventListener('mouseup', handleTouchEnd);
+}
+
+function removeFrameHandlers() {
+    $( ".collage_main_frame" )[0].removeEventListener('touchstart', handleTouchStart);
+    $( ".collage_main_frame" )[0].removeEventListener('touchmove', handleTouchMove);
+    $( ".collage_main_frame" )[0].removeEventListener('touchend', handleTouchEnd);
+    $( ".collage_main_frame" )[0].removeEventListener('mousedown', handleTouchStart);
+    $( ".collage_main_frame" )[0].removeEventListener('mousemove', handleTouchMove);
+    $( ".collage_main_frame" )[0].removeEventListener('mouseup', handleTouchEnd);
+}
+
 function handleTouchStart(evt) {
     if (precedingTouch) {
         // Detect double tap
@@ -416,6 +434,7 @@ function handleTouchEnd(evt) {
             if (frames[i]) {
                 if (frames[i].swipedThrough(swipe)) {
                     frames[i].split(swipe);
+                    precedingTouch = null;
                 }
             }
         }
@@ -423,6 +442,21 @@ function handleTouchEnd(evt) {
     if (evt.target.nodeName != "LABEL") {
         evt.preventDefault();
     }
+}
+
+function handleAspectChange(event) {
+    let reg = /\d+/g;
+    let [aspectX, aspectY] = $( ".aspect_numbers option:selected" ).text().match(reg);
+    let afterResize = determineMainFrameSize(aspectX, aspectY);
+    collageClean();
+    $( ".collage_main_frame" ).width(pixelify(afterResize.width));
+    $( ".collage_main_frame" ).height(pixelify(afterResize.height));
+    collageSetup();
+}
+
+function handleReset(event) {
+    collageClean();
+    collageSetup();
 }
 
 
@@ -578,14 +612,23 @@ function merge(targets) {
         toShrink = firstFrame;
     }
 
+    // Play animation and pause the handlers
+    removeFrameHandlers();
+    $( toShrink.classSelector ).animate({opacity: 0}, 300);
     if (targets[0].side === "bottom" || targets[0].side === "top") {
         toExpand.height += toShrink.height;
+        $( toShrink.classSelector ).animate({opacity: 0}, 300);
+        $( toExpand.classSelector ).animate({height: toExpand.height}, 300);
     } else {
         toExpand.width += toShrink.width;
+        $( toShrink.classSelector ).animate({opacity: 0}, 300);
+        $( toExpand.classSelector ).animate({width: toExpand.width}, 300);
     }
-
-    toShrink.delete();
-    toExpand.update();
+    setTimeout(function () {
+        toShrink.delete();
+        toExpand.update();
+        appendFrameHandlers();
+    }, 300);
 }
 
 function findElementsIndex(markup) {
