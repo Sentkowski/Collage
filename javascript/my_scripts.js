@@ -16,13 +16,23 @@ $(document).ready(function() {
     });
 
     appendFrameHandlers();
+    $( window ).resize( function () {
+        if ($( ".collage_main_frame" ).width() >= $( ".collage_section" ).width()) {
+            $( ".collage_main_frame" ).css("alignSelf", "flex-start");
+        } else {
+            $( ".collage_main_frame" ).css("alignSelf", "center");
+        }
+    });
 
     $( ".aspect_numbers" )[0].addEventListener('change', handleAspectChange);
     $( ".reset_button" )[0].addEventListener('click', handleReset);
+    $( ".create_button" )[0].addEventListener('click', handleCreate);
+    $( ".back_button" )[0].addEventListener('click', handleBack);
 
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
-        collageSetup();
+        findBiggestSize();
+        handleAspectChange();
     }
 
 
@@ -83,9 +93,11 @@ function hideCollage() {
 
 function showCollage() {
     $( ".collage_section" ).css("display", "flex");
+    findBiggestSize();
     $( ".collage_section" ).animate({opacity: 1}, 300, function () {
         if (frameCounter === 0) {
-            collageSetup();
+            findBiggestSize();
+            handleAspectChange();
         }
     });
 }
@@ -100,7 +112,7 @@ var frameCounter = 0;
 
 // Collage classes
 class Frame {
-    constructor(width, height, startPoint) {
+    constructor(width, height) {
         this.index = frameCounter;
         frameCounter++;
         this.class = "collage_frame_" + this.index;
@@ -112,8 +124,14 @@ class Frame {
         this.width = width;
         this.height = height;
         this.color = randomColorGen();
-        this.startPoint = startPoint;
         this.hasPhoto = false;
+    }
+
+    get startPoint() {
+        return {
+            top: Math.round($( this.classSelector ).position().top + $( ".collage_main_frame" ).position().top),
+            left: Math.round($( this.classSelector ).position().left + $( ".collage_main_frame" ).position().left),
+        }
     }
 
     get sides() {
@@ -147,17 +165,19 @@ class Frame {
             "position": "absolute",
             "width": pixelify(this.width),
             "height": pixelify(this.height),
-            "top": this.startPoint.top,
-            "left": this.startPoint.left,
             "backgroundColor": this.color,
         });
     }
 
-    append() {
+    append(startPoint) {
         $( ".collage_main_frame" ).append(this.markup);
         this.update();
         frames[this.index] = this;
         this.appendInput();
+        $( this.classSelector ).css({
+            "top": Math.round(startPoint.top - $( ".collage_main_frame" ).offset().top),
+            "left": Math.round(startPoint.left - $( ".collage_main_frame" ).offset().left),
+        });
     }
 
     appendInput() {
@@ -272,7 +292,7 @@ class Frame {
             newFrameHeight = this.height;
         }
         this.update();
-        new Frame(newFrameWidth, newFrameHeight, newFrameStart).append();
+        new Frame(newFrameWidth, newFrameHeight).append(newFrameStart);
     }
 }
 
@@ -311,9 +331,8 @@ function collageSetup() {
 
     // Initial frame covering the whole collage area
     let firstFrame = new Frame ($( ".collage_main_frame" ).width(),
-            $( ".collage_main_frame" ).height(),
-            $( ".collage_main_frame" ).position())
-    firstFrame.append()
+            $( ".collage_main_frame" ).height())
+    firstFrame.append($( ".collage_main_frame" ).position())
 }
 
 // Define the main collage frame size depending on a given ratio
@@ -327,7 +346,7 @@ function determineMainFrameSize(aspectX, aspectY) {
         maxHeight = $(window).height() * 0.60;
     } else {
         // Tablets and bigger
-        maxWidth = $(window).width() - 360;
+        maxWidth = $(window).width() - 380;
         maxHeight = $(window).height() * 0.75;
     }
 
@@ -375,6 +394,32 @@ function removeFrameHandlers() {
     $( ".collage_main_frame" )[0].removeEventListener('mouseup', handleTouchEnd);
 }
 
+function handleCreate() {
+    for (let frame of frames) {
+        if (frame) {
+            if (frame.hasPhoto === false) {
+                return;
+            }
+        }
+    }
+    const canvas = $( ".final_image" )[0];
+    const ctx = canvas.getContext('2d');
+    ctx.canvas.width = $( ".collage_main_frame" ).width();
+    ctx.canvas.height = $( ".collage_main_frame" ).height()
+    for (let frame of frames) {
+        if (frame) {
+            const frm = frame;
+            const top = $( frm.classSelector ).css('top').replace(/[^-\d\.]/g, '');
+            const left = $( frm.classSelector ).css('left').replace(/[^-\d\.]/g, '')
+            const img = $( frm.classSelector ).children()[0];
+            console.log(img, frm.width, frm.height,
+                    frm.startPoint.left, frm.startPoint.top)
+            ctx.drawImage(img, left, top, frm.width, frm.height);
+        }
+    }
+    $( ".results_section" ).css("display", "flex");
+}
+
 function handleTouchStart(evt) {
     if (precedingTouch) {
         // Detect double tap
@@ -399,19 +444,19 @@ function handleTouchStart(evt) {
     };
     if (evt.touches && evt.target.nodeName != "LABEL") {
         // Touch
-        precedingTouch.left = evt.touches[0].clientX;
-        precedingTouch.top = evt.touches[0].clientY;
+        Math.round(precedingTouch.left = evt.touches[0].pageX);
+        Math.round(precedingTouch.top = evt.touches[0].pageY);
         swipe.swipeStart = {
-            left: evt.touches[0].clientX,
-            top: evt.touches[0].clientY,
+            left: Math.round(evt.touches[0].pageX),
+            top: Math.round(evt.touches[0].pageY),
         };
     } else if (evt.target.nodeName != "LABEL") {
         // Mouse
-        precedingTouch.left = evt.clientX;
-        precedingTouch.top = evt.clientY;
+        Math.round(precedingTouch.left = evt.pageX);
+        Math.round(precedingTouch.top = evt.pageY);
         swipe.swipeStart = {
-            left: evt.clientX,
-            top: evt.clientY,
+            left: Math.round(evt.pageX),
+            top: Math.round(evt.pageY),
         };
     }
 
@@ -432,12 +477,12 @@ function handleTouchEnd(evt) {
         let top, left;
         if (evt.touches) {
             // Touch
-            left = lastSwipeTouch.touches[0].clientX;
-            top = lastSwipeTouch.touches[0].clientY;
+            left = Math.round(lastSwipeTouch.touches[0].pageX);
+            top = Math.round(lastSwipeTouch.touches[0].pageY);
         } else {
             // Mouse
-            left = evt.clientX;
-            top = evt.clientY;
+            left = Math.round(evt.pageX);
+            top = Math.round(evt.pageY);
         }
         swipe.swipeEnd = {
             left: left,
@@ -457,7 +502,7 @@ function handleTouchEnd(evt) {
     }
 }
 
-function handleAspectChange(event) {
+function handleAspectChange() {
     let reg = /\d+/g;
     let [aspectX, aspectY] = $( ".aspect_numbers option:selected" ).text().match(reg);
     let afterResize = determineMainFrameSize(aspectX, aspectY);
@@ -472,6 +517,9 @@ function handleReset(event) {
     collageSetup();
 }
 
+function handleBack() {
+    $( ".results_section" ).css("display", "none");
+}
 
 // Photo manipulation
 function addPhoto(evt) {
@@ -514,6 +562,19 @@ function tapOnPhotoDetection(doubleTapPoint) {
 
 // Helping functions
 
+
+function findBiggestSize() {
+    let sizes = [];
+    let reg = /\d+/g;
+    $( ".aspect_numbers option" ).each(function (index) {
+        let [aspX, aspY] = $(this).text().match(reg);
+        let lengths = determineMainFrameSize(aspX, aspY);
+        let size = lengths.height * lengths.width;
+        sizes.push(size);
+    });
+    let biggest = sizes.indexOf(Math.max(...sizes));
+    $($( ".aspect_numbers option" )[biggest]).attr("selected","selected");
+}
 
 function pixelify(num) {
     return num + "px"

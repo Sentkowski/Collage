@@ -71,6 +71,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    min-width: 0;
 
     @media #{$tablets} {
         opacity: 1;
@@ -98,5 +99,36 @@
         background-color: $primary-color-1;
         color: $primary-color-special;
         font-size: 5vh;
+    }
+}
+
+.results_section {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(black, 0.75);
+
+    p {
+        height: 5%;
+        font-size: 24px;
+        color: $primary-color-special;
+    }
+
+    button {
+        height: 15%;
+        width: 25%;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        background-color: $primary-color-special;
+        border-radius: 5px;
+        border: none;
     }
 }

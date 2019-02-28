@@ -57,15 +57,20 @@
                 %button.reset_button Reset
                 %button.instructions_button Instructions
             %section.collage_main_frame
-            %div.aspect_wrapper
-                %label.aspect_name(for="aspect_ratio") Aspect ratio
+            %div.bot_buttons_wrapper
+                %button.create_button Create
                 %select.aspect_numbers#aspect_ratio
                     %option 16:9
                     %option 3:2
-                    %option(selected) 4:3
+                    %option 4:3
                     %option 1:1
                     %option 2:3
                     %option 9:16
 
     %div.orientation_message
         %p For the best experience, change to portrait mode.
+
+    %section.results_section
+        %p You can save your image
+        %canvas.final_image
+        %button.back_button Return

@@ -218,20 +218,14 @@
 }
 
 .collage_main_frame {
-    width: 85vw;
-    height: calc(85vw * 0.75);
+    position: relative;
     background-color: rgba($primary-color-1, 0.25);
     display: flex;
-    overflow: auto;
+    overflow: hidden;
     overscroll-behavior-y: contain;
-
-    @media #{$tablets} {
-        width: 50vw;
-        height: calc(50vw * 0.75);
-    }
 }
 
-.aspect_wrapper {
+.bot_buttons_wrapper {
     display: flex;
     height: 10vh;
     width: 60vw;
@@ -245,17 +239,18 @@
         margin: 0;
     }
 
-    .aspect_name {
+    .create_button {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 8px;
         border-radius: 5px;
-        color: $primary-color-1;
+        color: $primary-color-special;
         width: 50%;
         height: 100%;
-        font-size: 2.5vh;
+        font-size: 3vh;
         text-align: center;
+        font-weight: bold;
         border: none;
         border-right: 1px solid $primary-color-1;
         background-color: rgba(white, 0);

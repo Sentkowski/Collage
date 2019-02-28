@@ -110,6 +110,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  min-width: 0;
 }
 
 @media screen and (min-width: 640px) and (min-height: 600px) {
@@ -123,13 +124,13 @@ body {
   }
 }
 
-/* line 84, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+/* line 85, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .orientation_message {
   display: none;
 }
 
 @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 84, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+  /* line 85, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
   .orientation_message {
     position: absolute;
     z-index: 1;
@@ -145,6 +146,40 @@ body {
     color: #DA01FF;
     font-size: 5vh;
   }
+}
+
+/* line 105, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.results_section {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* line 118, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.results_section p {
+  height: 5%;
+  font-size: 24px;
+  color: #DA01FF;
+}
+
+/* line 124, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.results_section button {
+  height: 15%;
+  width: 25%;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: #DA01FF;
+  border-radius: 5px;
+  border: none;
 }
 
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
@@ -423,24 +458,15 @@ body {
 
 /* line 220, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_main_frame {
-  width: 85vw;
-  height: calc(85vw * 0.75);
+  position: relative;
   background-color: rgba(81, 12, 255, 0.25);
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   overscroll-behavior-y: contain;
 }
 
-@media screen and (min-width: 640px) and (min-height: 600px) {
-  /* line 220, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .collage_main_frame {
-    width: 50vw;
-    height: calc(50vw * 0.75);
-  }
-}
-
-/* line 234, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.aspect_wrapper {
+/* line 228, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.bot_buttons_wrapper {
   display: flex;
   height: 10vh;
   width: 60vw;
@@ -449,8 +475,8 @@ body {
 }
 
 @media screen and (min-width: 640px) and (min-height: 600px) {
-  /* line 234, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .aspect_wrapper {
+  /* line 228, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  .bot_buttons_wrapper {
     width: 40%;
     min-width: 250px;
     height: 7%;
@@ -458,25 +484,26 @@ body {
   }
 }
 
-/* line 248, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.aspect_wrapper .aspect_name {
+/* line 242, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.bot_buttons_wrapper .create_button {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
   border-radius: 5px;
-  color: #510CFF;
+  color: #DA01FF;
   width: 50%;
   height: 100%;
-  font-size: 2.5vh;
+  font-size: 3vh;
   text-align: center;
+  font-weight: bold;
   border: none;
   border-right: 1px solid #510CFF;
   background-color: rgba(255, 255, 255, 0);
 }
 
-/* line 264, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.aspect_wrapper .aspect_numbers {
+/* line 259, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+.bot_buttons_wrapper .aspect_numbers {
   border: none;
   border-radius: 5px;
   color: #510CFF;
@@ -491,20 +518,20 @@ body {
   appearance: none;
 }
 
-/* line 280, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 275, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_frame {
   animation: appear 0.5s;
   cursor: crosshair;
 }
 
-/* line 284, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 279, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_frame img {
   width: 100%;
   height: 100%;
   animation: 1s ease-in-out 0s 1 paused appear;
 }
 
-/* line 292, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 287, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -516,7 +543,7 @@ body {
   width: 1px;
 }
 
-/* line 303, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 298, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] + label {
   position: absolute;
   background-color: #3D39FF;
@@ -537,7 +564,7 @@ body {
   opacity: 0;
 }
 
-/* line 323, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 318, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader_wrapper {
   display: block;
   position: absolute;
@@ -546,7 +573,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* line 331, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 326, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader {
   border: 4px solid #3D39FF;
   border-top: 4px solid #DA01FF;
