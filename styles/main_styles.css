@@ -164,22 +164,45 @@ body {
 }
 
 /* line 118, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-.results_section p {
-  height: 5%;
-  font-size: 24px;
-  color: #DA01FF;
+.results_section .results_buttons {
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  height: 10vh;
+  align-items: center;
+  justify-content: space-around;
 }
 
-/* line 124, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-.results_section button {
-  height: 15%;
-  width: 25%;
-  font-size: 24px;
+@media screen and (min-width: 640px) and (min-height: 600px) {
+  /* line 118, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+  .results_section .results_buttons {
+    width: 50%;
+  }
+}
+
+/* line 131, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.results_section button, .results_section a {
+  height: 50%;
+  width: 40%;
+  font-size: 18px;
   font-weight: bold;
   color: white;
   background-color: #DA01FF;
   border-radius: 5px;
   border: none;
+}
+
+@media screen and (min-width: 640px) and (min-height: 600px) {
+  /* line 131, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+  .results_section button, .results_section a {
+    font-size: 24px;
+  }
+}
+
+/* line 146, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+.results_section .download_button {
+  height: 100%;
+  width: 100%;
 }
 
 /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */

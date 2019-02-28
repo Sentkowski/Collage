@@ -115,20 +115,36 @@
     align-items: center;
     background-color: rgba(black, 0.75);
 
-    p {
-        height: 5%;
-        font-size: 24px;
-        color: $primary-color-special;
+    .results_buttons {
+        display: flex;
+        flex-direction: row;
+        width: 90vw;
+        height: 10vh;
+        align-items: center;
+        justify-content: space-around;
+
+        @media #{$tablets} {
+            width: 50%;
+        }
     }
 
-    button {
-        height: 15%;
-        width: 25%;
-        font-size: 24px;
+    button, a {
+        height: 50%;
+        width: 40%;
+        font-size: 18px;
         font-weight: bold;
         color: white;
         background-color: $primary-color-special;
         border-radius: 5px;
         border: none;
+
+        @media #{$tablets} {
+            font-size: 24px;
+        }
+    }
+
+    .download_button {
+        height: 100%;
+        width: 100%;
     }
 }

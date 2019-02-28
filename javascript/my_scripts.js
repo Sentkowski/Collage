@@ -28,6 +28,7 @@ $(document).ready(function() {
     $( ".reset_button" )[0].addEventListener('click', handleReset);
     $( ".create_button" )[0].addEventListener('click', handleCreate);
     $( ".back_button" )[0].addEventListener('click', handleBack);
+    $( ".download_button" )[0].addEventListener('click', collageDownload);
 
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
@@ -519,6 +520,12 @@ function handleReset(event) {
 
 function handleBack() {
     $( ".results_section" ).css("display", "none");
+}
+
+function collageDownload() {
+    const canvas = $( ".final_image" )[0];
+    const image = canvas.toDataURL("image/jpg");
+    $( "a" )[0].href = image;
 }
 
 // Photo manipulation
