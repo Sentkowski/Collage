@@ -365,7 +365,7 @@ function determineMainFrameSize(aspectX, aspectY) {
             howManyTimes--;
         }
     }
-    $($("h2")[1]).text(howManyTimes);
+    $($("h2")[1]).text(Math.floor(maxWidth / aspectX));
     return {width: aspectX * howManyTimes,
             height: aspectY * howManyTimes};
 }
