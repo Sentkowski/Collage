@@ -33,7 +33,9 @@ $(document).ready(function() {
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
         findBiggestSize();
-        handleAspectChange();
+        setTimeout(function () {
+            handleAspectChange();
+        }, 50);
     }
 
 
@@ -130,8 +132,8 @@ class Frame {
 
     get startPoint() {
         return {
-            top: Math.round($( this.classSelector ).position().top + $( ".collage_main_frame" ).position().top),
-            left: Math.round($( this.classSelector ).position().left + $( ".collage_main_frame" ).position().left),
+            top: Math.round($( this.classSelector ).position().top) + Math.round($( ".collage_main_frame" ).position().top),
+            left: Math.round($( this.classSelector ).position().left) + Math.round($( ".collage_main_frame" ).position().left),
         }
     }
 
@@ -176,8 +178,8 @@ class Frame {
         frames[this.index] = this;
         this.appendInput();
         $( this.classSelector ).css({
-            "top": Math.round(startPoint.top - $( ".collage_main_frame" ).offset().top),
-            "left": Math.round(startPoint.left - $( ".collage_main_frame" ).offset().left),
+            "top": Math.round(startPoint.top) - Math.round($( ".collage_main_frame" ).offset().top),
+            "left": Math.round(startPoint.left) - Math.round($( ".collage_main_frame" ).offset().left),
         });
     }
 
