@@ -356,6 +356,7 @@ function determineMainFrameSize(aspectX, aspectY) {
     if (aspectX > aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
         // Make sure the frame fits from both sides
+        $($("h2")[0]).text(howManyTimes * aspectY);
         while ((howManyTimes * aspectY) > maxHeight) {
             howManyTimes--;
         }
@@ -511,7 +512,6 @@ function handleAspectChange() {
     let afterResize = determineMainFrameSize(aspectX, aspectY);
     collageClean();
     $( ".collage_main_frame" ).width(pixelify(afterResize.width));
-    $($("h2")[0]).text($( ".collage_main_frame" ).width());
     $( ".collage_main_frame" ).height(pixelify(afterResize.height));
     collageSetup();
 }
