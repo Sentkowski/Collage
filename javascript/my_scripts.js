@@ -352,7 +352,8 @@ function determineMainFrameSize(aspectX, aspectY) {
         maxWidth = $(window).width() - 380;
         maxHeight = $(window).height() * 0.75;
     }
-
+    $($("h2")[0]).text($(window).width());
+    $($("h2")[1]).text(aspectX);
     let howManyTimes, newX, newY;
     if (aspectX > aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
@@ -366,7 +367,6 @@ function determineMainFrameSize(aspectX, aspectY) {
             howManyTimes--;
         }
     }
-    $("h2").text(aspectX * howManyTimes)
     return {width: aspectX * howManyTimes,
             height: aspectY * howManyTimes};
 }
