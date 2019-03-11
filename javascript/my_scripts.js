@@ -356,7 +356,7 @@ function determineMainFrameSize(aspectX, aspectY) {
     if (aspectX > aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
         // Make sure the frame fits from both sides
-        while (howManyTimes * aspectY > maxHeight) {
+        while ((howManyTimes * aspectY) > maxHeight) {
             howManyTimes--;
         }
     } else {
@@ -365,7 +365,7 @@ function determineMainFrameSize(aspectX, aspectY) {
             howManyTimes--;
         }
     }
-    $($("h2")[1]).text(Math.floor(maxWidth / aspectX));
+    $($("h2")[1]).text(maxHeight);
     return {width: aspectX * howManyTimes,
             height: aspectY * howManyTimes};
 }
