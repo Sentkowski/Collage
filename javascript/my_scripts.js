@@ -352,8 +352,6 @@ function determineMainFrameSize(aspectX, aspectY) {
         maxWidth = $(window).width() - 380;
         maxHeight = $(window).height() * 0.75;
     }
-    $($("h2")[0]).text($(window).width());
-    $($("h2")[1]).text(aspectX);
     let howManyTimes, newX, newY;
     if (aspectX > aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
@@ -367,6 +365,7 @@ function determineMainFrameSize(aspectX, aspectY) {
             howManyTimes--;
         }
     }
+    $($("h2")[1]).text(howManyTimes);
     return {width: aspectX * howManyTimes,
             height: aspectY * howManyTimes};
 }
@@ -512,6 +511,7 @@ function handleAspectChange() {
     let afterResize = determineMainFrameSize(aspectX, aspectY);
     collageClean();
     $( ".collage_main_frame" ).width(pixelify(afterResize.width));
+    $($("h2")[0]).text($( ".collage_main_frame" ).width());
     $( ".collage_main_frame" ).height(pixelify(afterResize.height));
     collageSetup();
 }
