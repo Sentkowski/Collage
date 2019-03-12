@@ -507,8 +507,8 @@ function handleTouchEnd(evt) {
 
 function handleAspectChange() {
     let reg = /\d+/g;
-    let [aspectX, aspectY] = $( ".aspect_numbers option:selected" ).text().match(reg);
-    $($("h2")[1]).text($( ".aspect_numbers option:selected" ).text().match(reg));
+    let [aspectX, aspectY] = $($( ".aspect_numbers option:selected" )[0]).text().match(reg);
+    $($("h2")[1]).text(aspectX + " " + aspectY);
     let afterResize = determineMainFrameSize(aspectX, aspectY);
     collageClean();
     $( ".collage_main_frame" ).width(pixelify(afterResize.width));
@@ -583,7 +583,6 @@ function findBiggestSize() {
         sizes.push(size);
     });
     let biggest = sizes.indexOf(Math.max(...sizes));
-    $( ".aspect_numbers option" ).removeAttr("selected");
     $($( ".aspect_numbers option" )[biggest]).attr("selected","selected");
 }
 
