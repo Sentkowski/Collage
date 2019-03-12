@@ -583,6 +583,7 @@ function findBiggestSize() {
         sizes.push(size);
     });
     let biggest = sizes.indexOf(Math.max(...sizes));
+    $( ".aspect_numbers option" ).removeAttr("selected");
     $($( ".aspect_numbers option" )[biggest]).attr("selected","selected");
 }
 
