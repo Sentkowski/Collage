@@ -33,13 +33,8 @@ $(document).ready(function() {
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
         findBiggestSize();
-        setTimeout(function () {
-            handleAspectChange();
-        }, 50);
+        handleAspectChange();
     }
-
-
-
 });
 
 
@@ -583,7 +578,7 @@ function findBiggestSize() {
         sizes.push(size);
     });
     let biggest = sizes.indexOf(Math.max(...sizes));
-    $($( ".aspect_numbers option" )[biggest]).attr("selected","selected");
+    $($( ".aspect_numbers option" )[biggest]).prop('selected', true);
 }
 
 function pixelify(num) {
