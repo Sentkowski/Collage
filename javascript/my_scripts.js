@@ -357,7 +357,6 @@ function determineMainFrameSize(aspectX, aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
         // Make sure the frame fits from both sides
         $($("h2")[0]).text(howManyTimes);
-        $($("h2")[1]).text(aspectX + " " + aspectY);
         while ((howManyTimes * aspectY) > maxHeight) {
             howManyTimes--;
         }
@@ -509,6 +508,7 @@ function handleTouchEnd(evt) {
 function handleAspectChange() {
     let reg = /\d+/g;
     let [aspectX, aspectY] = $( ".aspect_numbers option:selected" ).text().match(reg);
+    $($("h2")[1]).text($( ".aspect_numbers option:selected" ).text().match(reg));
     let afterResize = determineMainFrameSize(aspectX, aspectY);
     collageClean();
     $( ".collage_main_frame" ).width(pixelify(afterResize.width));
