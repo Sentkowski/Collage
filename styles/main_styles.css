@@ -690,9 +690,10 @@ body {
   border-radius: 10px;
   opacity: 0;
   font-size: 4vh;
+  padding: 10px;
 }
 
-/* line 383, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 384, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -704,7 +705,7 @@ body {
   width: 1px;
 }
 
-/* line 394, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 395, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] + label {
   position: absolute;
   background-color: #3D39FF;
@@ -725,7 +726,7 @@ body {
   opacity: 0;
 }
 
-/* line 414, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 415, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader_wrapper {
   display: block;
   position: absolute;
@@ -734,7 +735,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* line 422, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+/* line 423, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader {
   border: 4px solid #3D39FF;
   border-top: 4px solid #DA01FF;
