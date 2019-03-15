@@ -393,8 +393,8 @@ function determineMainFrameSize(aspectX, aspectY) {
         maxHeight = $(window).height() * 0.75;
     } else {
         // Landscape
-        maxWidth = $(window).width() * 0.70;
-        maxHeight = $(window).height() * 0.75;
+        maxWidth = $(window).width() * 0.7;
+        maxHeight = $(window).height() * 0.85;
     }
     let howManyTimes, newX, newY;
     if (aspectX > aspectY) {
