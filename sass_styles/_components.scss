@@ -19,8 +19,16 @@
         font-size: 4vh;
     }
 
+    @media #{$phoneLandscape} {
+        font-size: 5vh;
+    }
+
     h1 {
         margin-left: 16px;
+
+        @media #{$phoneLandscape} {
+            margin-left: 3vh;
+        }
     }
 }
 
@@ -345,6 +353,30 @@
         height: 100%;
         animation: 1s ease-in-out 0s 1 paused appear;
     }
+}
+
+.finger_icon {
+    display: none;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+}
+
+.message {
+    position: absolute;
+    height: 20vh;
+    width: 60vw;
+    top: 20vh;
+    left: 20vw;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    background-color: $primary-color-2;
+    border-radius: 10px;
+    opacity: 0;
+    font-size: 4vh;
 }
 
 // Styled according to https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/

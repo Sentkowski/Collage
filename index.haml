@@ -8,7 +8,7 @@
     %link(rel="stylesheet" type="text/css" href="styles/main_styles.css")
     %script(src="javascript/jquery.js")
     %script(src="javascript/my_scripts.js")
-    %title Collage Cut
+    %title Collage Ninja
 
 %body
     %div.page_wrapper
@@ -68,9 +68,16 @@
                     %option 2:3
                     %option 9:16
 
+    / Loose elements
+
     %section.results_section
         %canvas.final_image
         %div.results_buttons
             %a(download="collage.jpg" href="")
                 %button.download_button Download
             %button.back_button Return
+
+    %img.finger_icon(src="interface/finger_icon.svg")
+
+    %div.message
+        %p.message_text All the slots have to be filled.

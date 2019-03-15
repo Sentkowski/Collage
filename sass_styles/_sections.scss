@@ -121,14 +121,18 @@
     }
 
     button, a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         min-height: 50%;
         width: 40%;
         font-size: 18px;
         font-weight: bold;
         color: white;
-        background-color: $primary-color-special;
+        background-color: $primary-color-1;
         border-radius: 5px;
         border: none;
+        cursor: pointer;
 
         @media #{$tablets} {
             font-size: 24px;

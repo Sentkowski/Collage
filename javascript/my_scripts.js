@@ -34,8 +34,7 @@ $(document).ready(function() {
 
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
-        findBiggestSize();
-        handleAspectChange();
+        perpareCollageFrames();
     }
 });
 
@@ -96,10 +95,31 @@ function showCollage() {
     $( ".collage_section" ).animate({opacity: 1}, 300);
     setTimeout(function() {
         if (frameCounter === 0) {
-            findBiggestSize();
-            handleAspectChange();
+            perpareCollageFrames();
         }
     }, 20);
+}
+
+function perpareCollageFrames() {
+    findBiggestSize();
+    handleAspectChange();
+
+    // Play finger animation
+    setTimeout(function () {
+        $( ".finger_icon" ).css({top: $( ".collage_main_frame" ).position().top + 0.2 * $( ".collage_main_frame" ).height(),
+            left: $( ".collage_main_frame" ).position().left + 0.7 * $( ".collage_main_frame" ).width(), display: "block"})
+        $( ".finger_icon" ).animate({opacity: 1}, 300, function () {
+            $( ".finger_icon" ).animate({top: $( ".collage_main_frame" ).position().top + 0.8 * $( ".collage_main_frame" ).height()}, 1500, function() {
+                $( ".finger_icon" ).css({top: $( ".collage_main_frame" ).position().top + 0.7 * $( ".collage_main_frame" ).height(),
+                    left: $( ".collage_main_frame" ).position().left + 0.2 * $( ".collage_main_frame" ).width()});
+                $( ".finger_icon" ).animate({left: $( ".collage_main_frame" ).position().left + 0.8 * $( ".collage_main_frame" ).width()}, 2000, function () {
+                    $( ".finger_icon" ).animate({opacity: 0}, 300, function () {
+                        $( ".finger_icon" ).css("display", "none");
+                    });
+                });
+            });
+        });
+    }, 500);
 }
 
 var collageLayout = "mobile";
@@ -424,6 +444,7 @@ function handleCreate() {
     for (let frame of frames) {
         if (frame) {
             if (frame.hasPhoto === false) {
+                showMessage();
                 return;
             }
         }
@@ -592,6 +613,15 @@ function tapOnPhotoDetection(doubleTapPoint) {
 
 // Helping functions
 
+function showMessage() {
+    $( ".message" ).css("display", "flex");
+    $( ".message" ).animate({opacity: 0.75}, 500);
+    setTimeout(function() {
+        $( ".message" ).animate({opacity: 0}, 500, function() {
+            $( ".message" ).css("display", "none");
+        });
+    }, 2000);
+}
 
 function findBiggestSize() {
     let sizes = [];
