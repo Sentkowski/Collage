@@ -22,6 +22,7 @@ $(document).ready(function() {
         } else {
             $( ".collage_main_frame" ).css("alignSelf", "center");
         }
+        detectLayoutChange();
     });
 
     $( ".aspect_numbers" )[0].addEventListener('change', handleAspectChange);
@@ -29,6 +30,7 @@ $(document).ready(function() {
     $( ".create_button" )[0].addEventListener('click', handleCreate);
     $( ".back_button" )[0].addEventListener('click', handleBack);
     $( ".download_button" )[0].addEventListener('click', collageDownload);
+
 
     // Collage already displayed because of media queries
     if($( window ).width() >= 640 && $( window ).height() >= 600) {
@@ -43,13 +45,13 @@ $(document).ready(function() {
 function hideWelcome() {
     $( ".proceed_button" ).off()
     $( ".welcome_section" ).animate({opacity: 0}, 300, function() {
-        $(".welcome_flag").css({opacity: 0, height: "7%", width: "50%", margin: "2.5vh 0 1.5vh 0"});
+        $(".welcome_flag").css({opacity: 0, height: "7%", width: "50%", margin: "2.5vh 0 1.5vh 0", fontSize: "3vh"});
         $(" .to_slide_down ").css({opacity: 0});
         $( ".side_menu" ).prepend( $(" .to_slide_down "));
         $( ".to_slide_down" ).css({top: "82vh"});
         $(" .to_slide_down ").animate({opacity: 1}, 300);
         $( ".side_menu" ).prepend( $(".welcome_flag") );
-        $( ".welcome_section" ).remove();
+        $( ".welcome_section" ).css("display", "none");
         $(".welcome_flag").animate({opacity: 1}, 300);
     });
 
@@ -78,7 +80,7 @@ function hideInstructions() {
     .animate({opacity: 0}, 300, function() {
         $( ".instructions_section, .dot_line.down.hor, .proceed_button, .side_menu" )
         .css("display", "none");
-        $( ".collage_section" ).before( $(".welcome_flag") );
+        $( ".collage_section" ).before( $( ".welcome_flag" ) );
     })
 }
 
@@ -91,13 +93,20 @@ function hideCollage() {
 
 function showCollage() {
     $( ".collage_section" ).css("display", "flex");
-    findBiggestSize();
-    $( ".collage_section" ).animate({opacity: 1}, 300, function () {
+    $( ".collage_section" ).animate({opacity: 1}, 300);
+    setTimeout(function() {
         if (frameCounter === 0) {
             findBiggestSize();
             handleAspectChange();
         }
-    });
+    }, 20);
+}
+
+var collageLayout = "mobile";
+if (window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches) {
+    collageLayout = "desktop";
+} else if (window.matchMedia("screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)").matches) {
+    collageLayout = "landscape";
 }
 
 
@@ -333,25 +342,44 @@ function collageSetup() {
     firstFrame.append($( ".collage_main_frame" ).position())
 }
 
+function detectLayoutChange() {
+    if (collageLayout === "landscape") {
+        if (!(window.matchMedia("screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)").matches)) {
+            location.href = location.href;
+        }
+    } else if (collageLayout === "mobile") {
+        if (!(window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches)) {
+            location.href = location.href;
+        }
+    } else {
+        if (!(window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches)) {
+            location.href = location.href;
+        }
+    }
+}
+
 // Define the main collage frame size depending on a given ratio
 function determineMainFrameSize(aspectX, aspectY) {
     let maxWidth, maxHeight;
 
     // See how much free space there is
-    if ($(window).width() < 640 || $(window).height() < 600) {
+    if (!(window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches || window.matchMedia("screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)").matches)) {
         // Mobile
         maxWidth = $(window).width() * 0.85;
         maxHeight = $(window).height() * 0.60;
-    } else {
-        // Tablets and bigger
+    } else if (window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches) {
+        // Tablets and desktops
         maxWidth = $(window).width() - 380;
+        maxHeight = $(window).height() * 0.75;
+    } else {
+        // Landscape
+        maxWidth = $(window).width() * 0.70;
         maxHeight = $(window).height() * 0.75;
     }
     let howManyTimes, newX, newY;
     if (aspectX > aspectY) {
         howManyTimes = Math.floor(maxWidth / aspectX);
         // Make sure the frame fits from both sides
-        $($("h2")[0]).text(howManyTimes);
         while ((howManyTimes * aspectY) > maxHeight) {
             howManyTimes--;
         }
@@ -410,8 +438,6 @@ function handleCreate() {
             const top = $( frm.classSelector ).css('top').replace(/[^-\d\.]/g, '');
             const left = $( frm.classSelector ).css('left').replace(/[^-\d\.]/g, '')
             const img = $( frm.classSelector ).children()[0];
-            console.log(img, frm.width, frm.height,
-                    frm.startPoint.left, frm.startPoint.top)
             ctx.drawImage(img, left, top, frm.width, frm.height);
         }
     }
@@ -503,7 +529,6 @@ function handleTouchEnd(evt) {
 function handleAspectChange() {
     let reg = /\d+/g;
     let [aspectX, aspectY] = $($( ".aspect_numbers option:selected" )[0]).text().match(reg);
-    $($("h2")[1]).text(aspectX + " " + aspectY);
     let afterResize = determineMainFrameSize(aspectX, aspectY);
     collageClean();
     $( ".collage_main_frame" ).width(pixelify(afterResize.width));
@@ -708,6 +733,22 @@ function merge(targets) {
         toExpand.update();
         appendFrameHandlers();
     }, 300);
+}
+
+function detectLayoutChange() {
+    if (collageLayout === "landscape") {
+        if (!(window.matchMedia("screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)").matches)) {
+            location.href = location.href;
+        }
+    } else if (collageLayout === "mobile") {
+        if (window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches || window.matchMedia("screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)").matches) {
+            location.href = location.href;
+        }
+    } else {
+        if (!(window.matchMedia("screen and (min-width: 640px) and (min-height: 640px)").matches)) {
+            location.href = location.href;
+        }
+    }
 }
 
 function findElementsIndex(markup) {

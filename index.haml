@@ -15,10 +15,11 @@
         %div.side_menu
             %section.welcome_section
                 %header.welcome_flag.to_shrink
-                %img.dot_line.vert.left.to_fade(src="interface/line_vert.png")
-                %img.dot_line.right.vert.to_fade(src="interface/line_vert.png")
-                %img.dot_line.up.hor.to_fade(src="interface/line_hor.png")
-                %img.dot_line.down.hor.to_slide_down(src="interface/line_hor.png")
+                    %h1.app_name Collage Ninja
+                %img.dot_line.vert.left.to_fade(src="interface/line_ver.svg")
+                %img.dot_line.right.vert.to_fade(src="interface/line_ver.svg")
+                %img.dot_line.up.hor.to_fade(src="interface/line_hor.svg")
+                %img.dot_line.down.hor.to_slide_down(src="interface/line_hor.svg")
                 %section.welcome_description.to_fade
                     %h2 Put all your favorite photos together for free!
                 %ol.benefit_list.to_fade
@@ -66,9 +67,6 @@
                     %option 1:1
                     %option 2:3
                     %option 9:16
-
-    %div.orientation_message
-        %p For the best experience, change to portrait mode.
 
     %section.results_section
         %canvas.final_image

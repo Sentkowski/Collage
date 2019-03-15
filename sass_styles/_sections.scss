@@ -8,10 +8,6 @@
         flex-direction: row;
         justify-content: space-around;
     }
-
-    @media #{$phoneLandscape} {
-        display: none;
-    }
 }
 
 .side_menu {
@@ -24,6 +20,10 @@
         height: 100%;
         flex-basis: 320px;
         flex-grow: 0;
+    }
+
+    @media #{$phoneLandscape} {
+        flex-direction: column;
     }
 }
 
@@ -60,6 +60,13 @@
         height: 40vh;
         opacity: 1;
     }
+
+    @media #{$phoneLandscape} {
+        align-self: center;
+        margin: 0;
+        padding: 2.5% 0;
+        width: 75%;
+    }
 }
 
 .collage_section {
@@ -80,25 +87,10 @@
         flex-grow: 1;
         height: 100%;
     }
-}
-
-.orientation_message {
-    display: none;
 
     @media #{$phoneLandscape} {
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        background-color: $primary-color-1;
-        color: $primary-color-special;
-        font-size: 5vh;
+        flex-direction: row;
+        width: 100%;
     }
 }
 
@@ -129,7 +121,7 @@
     }
 
     button, a {
-        height: 50%;
+        min-height: 50%;
         width: 40%;
         font-size: 18px;
         font-weight: bold;

@@ -6,11 +6,21 @@
     background-image: url("../interface/name_flag.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-size: 5vh;
 
     @media #{$tablets} {
         height: 15%;
         margin: 0;
         width: 100%;
+        font-size: 4vh;
+    }
+
+    h1 {
+        margin-left: 16px;
     }
 }
 
@@ -38,6 +48,10 @@
             font-size: 2.5vh;
             padding: 0;
         }
+
+        @media #{$phoneLandscape} {
+            font-size: 5vh;
+        }
     }
 }
 
@@ -53,6 +67,12 @@
         height: 60%;
         padding: 0 5%;
         margin-top: 0;
+    }
+
+    @media #{$phoneLandscape} {
+        padding: 0 25%;
+        height: 44%;
+        margin-top: 1%;
     }
 }
 
@@ -78,6 +98,10 @@
         strong {
             font-weight: bold;
         }
+
+        @media #{$phoneLandscape} {
+            font-size: 4vh;
+        }
     }
 }
 
@@ -88,6 +112,10 @@
     height: 103%;
     width: 20%;
     top: -1px;
+
+    @media #{$phoneLandscape} {
+        height: 105%;
+    }
 
     &.right {
         left: 1px;
@@ -105,6 +133,10 @@
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+
+        @media #{$phoneLandscape} {
+            font-size: 24px;
+        }
     }
 }
 
@@ -126,10 +158,18 @@
         font-weight: bold;
         font-size: 3vh;
         text-align: center;
+
+        @media #{$phoneLandscape} {
+            font-size: 4vh;
+        }
     }
 
     @media #{$tablets} {
         display: none;
+    }
+
+    @media #{$phoneLandscape} {
+        width: 30vw;
     }
 }
 
@@ -146,6 +186,10 @@
     @media #{$taller} {
         font-size: 3vh;
     }
+
+    @media #{$phoneLandscape} {
+        font-size: 5vh;
+    }
 }
 
 .inst_step {
@@ -160,6 +204,10 @@
 
     @media #{$taller} {
         font-size: 2vh;
+    }
+
+    @media #{$phoneLandscape} {
+        font-size: 4vh;
     }
 
     strong {
@@ -185,6 +233,12 @@
         width: 50%;
     }
 
+    @media #{$phoneLandscape} {
+        flex-direction: column-reverse;
+        height: 50%;
+        width: auto;
+    }
+
     button {
         height: 7.5vh;
         width: 40vw;
@@ -198,7 +252,12 @@
             min-width: 150px;
             font-size: 2.5vh;
         }
+
+        @media #{$phoneLandscape} {
+            width: auto;
+        }
     }
+
 }
 
 .reset_button {
@@ -237,6 +296,11 @@
         min-width: 250px;
         height: 7%;
         margin: 0;
+    }
+
+    @media #{$phoneLandscape} {
+        min-width: 15vw;
+        width: auto;
     }
 
     .create_button {
