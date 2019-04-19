@@ -3,10 +3,10 @@
     // height: 12vh;
     // width: 80vw;
     // margin: 5vh 0;
+    display: flex;
     background-image: url("../interface/name_flag.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     color: white;
@@ -403,7 +403,6 @@
     height: 30px;
     margin: auto;
     text-align: center;
-    vertical-align: middle;
     line-height: 30px;
     font-size: 30px;
     top: 50%;

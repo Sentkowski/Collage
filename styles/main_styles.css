@@ -1,81 +1,50 @@
-/* line 7, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
 html {
-  font-family: 'Roboto', sans-serif;
-}
+  font-family: 'Roboto', sans-serif; }
 
-/* line 11, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
 button {
-  font-family: 'Roboto', sans-serif;
-}
+  font-family: 'Roboto', sans-serif; }
 
-/* line 15, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
 * {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
-/* line 19, C:/Users/alnet/Documents/Collage/Collage/sass_styles/main_styles.scss */
 body {
-  overscroll-behavior: contain;
-}
+  overscroll-behavior: contain; }
 
-/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .page_wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
-}
+  width: 100vw; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .page_wrapper {
+      flex-direction: row;
+      justify-content: space-around; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .page_wrapper {
-    flex-direction: row;
-    justify-content: space-around;
-  }
-}
-
-/* line 13, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .side_menu {
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .side_menu {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-basis: 320px;
+      flex-grow: 0; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .side_menu {
+      flex-direction: column; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 13, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .side_menu {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex-basis: 320px;
-    flex-grow: 0;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 13, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .side_menu {
-    flex-direction: column;
-  }
-}
-
-/* line 30, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .welcome_section {
   height: 100%;
   width: 100%;
-  overflow: hidden;
-}
+  overflow: hidden; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .welcome_section {
+      height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 30, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .welcome_section {
-    height: 55vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-}
-
-/* line 43, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .instructions_section {
   position: absolute;
   top: 15%;
@@ -87,30 +56,20 @@ body {
   margin: auto 5%;
   padding: 5% 0;
   border: 1px solid #510CFF;
-  border-radius: 10px;
-}
+  border-radius: 10px; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .instructions_section {
+      position: static;
+      display: flex;
+      height: 40vh;
+      opacity: 1; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .instructions_section {
+      align-self: center;
+      margin: 0;
+      padding: 2.5% 0;
+      width: 75%; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 43, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .instructions_section {
-    position: static;
-    display: flex;
-    height: 40vh;
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 43, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .instructions_section {
-    align-self: center;
-    margin: 0;
-    padding: 2.5% 0;
-    width: 75%;
-  }
-}
-
-/* line 72, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .collage_section {
   opacity: 0;
   width: 90vw;
@@ -120,29 +79,19 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  min-width: 0;
-}
+  min-width: 0; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .collage_section {
+      opacity: 1;
+      display: flex;
+      flex-basis: 320px;
+      flex-grow: 1;
+      height: 100%; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .collage_section {
+      flex-direction: row;
+      width: 100%; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 72, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .collage_section {
-    opacity: 1;
-    display: flex;
-    flex-basis: 320px;
-    flex-grow: 1;
-    height: 100%;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 72, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-  .collage_section {
-    flex-direction: row;
-    width: 100%;
-  }
-}
-
-/* line 97, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
 .results_section {
   display: none;
   position: absolute;
@@ -154,249 +103,151 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
-}
-
-/* line 110, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-.results_section .results_buttons {
-  display: flex;
-  flex-direction: row;
-  width: 90vw;
-  height: 10vh;
-  align-items: center;
-  justify-content: space-around;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 110, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+  background-color: black; }
   .results_section .results_buttons {
-    width: 50%;
-  }
-}
-
-/* line 123, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-.results_section button, .results_section a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50%;
-  width: 40%;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  background-color: #510CFF;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 123, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-around; }
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      .results_section .results_buttons {
+        width: 50%; } }
   .results_section button, .results_section a {
-    font-size: 24px;
-  }
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50%;
+    width: 40%;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #510CFF;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer; }
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      .results_section button, .results_section a {
+        font-size: 24px; } }
+  .results_section .download_button {
+    height: 100%;
+    width: 100%; }
 
-/* line 142, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_sections.scss */
-.results_section .download_button {
-  height: 100%;
-  width: 100%;
-}
-
-/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .welcome_flag {
+  display: flex;
   background-image: url("../interface/name_flag.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   color: white;
-  font-size: 5vh;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .welcome_flag {
-    height: 15%;
-    margin: 0;
-    width: 100%;
-    font-size: 4vh;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .welcome_flag {
-    font-size: 5vh;
-  }
-}
-
-/* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.welcome_flag h1 {
-  margin-left: 16px;
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  font-size: 5vh; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .welcome_flag {
+      height: 15%;
+      margin: 0;
+      width: 100%;
+      font-size: 4vh; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .welcome_flag {
+      font-size: 5vh; } }
   .welcome_flag h1 {
-    margin-left: 3vh;
-  }
-}
+    margin-left: 16px; }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .welcome_flag h1 {
+        margin-left: 3vh; } }
 
-/* line 36, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .welcome_description {
   margin: 0 auto;
   height: 15%;
-  width: 80%;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 36, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .welcome_description {
-    height: 15%;
-  }
-}
-
-/* line 45, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.welcome_description h2 {
-  font-weight: bold;
-  font-size: 3vh;
-  text-align: center;
-  color: #3D39FF;
-  padding: 0 24px;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 45, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  width: 80%; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .welcome_description {
+      height: 15%; } }
   .welcome_description h2 {
-    font-size: 2.5vh;
-    padding: 0;
-  }
-}
+    font-weight: bold;
+    font-size: 3vh;
+    text-align: center;
+    color: #3D39FF;
+    padding: 0 24px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      .welcome_description h2 {
+        font-size: 2.5vh;
+        padding: 0; } }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .welcome_description h2 {
+        font-size: 5vh; } }
 
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 45, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .welcome_description h2 {
-    font-size: 5vh;
-  }
-}
-
-/* line 66, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .benefit_list {
   display: flex;
   flex-direction: column;
   height: 40%;
   justify-content: space-around;
   padding: 0 15%;
-  margin-top: 5%;
-}
+  margin-top: 5%; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .benefit_list {
+      height: 60%;
+      padding: 0 5%;
+      margin-top: 0; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .benefit_list {
+      padding: 0 25%;
+      height: 44%;
+      margin-top: 1%; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 66, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .benefit_list {
-    height: 60%;
-    padding: 0 5%;
-    margin-top: 0;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 66, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .benefit_list {
-    padding: 0 25%;
-    height: 44%;
-    margin-top: 1%;
-  }
-}
-
-/* line 87, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .benefit_box {
   display: flex;
   height: 20%;
   border: 1px solid #510CFF;
   box-sizing: border-box;
-  border-radius: 5px;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 87, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .benefit_box {
-    height: 25%;
-  }
-}
-
-/* line 98, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.benefit_box .ben_text {
-  padding: 0 8px;
-  font-size: 2.5vh;
-  text-align: center;
-  align-self: center;
-  color: #510CFF;
-  width: 80%;
-}
-
-/* line 106, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.benefit_box .ben_text strong {
-  font-weight: bold;
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 98, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  border-radius: 5px; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .benefit_box {
+      height: 25%; } }
   .benefit_box .ben_text {
-    font-size: 4vh;
-  }
-}
+    padding: 0 8px;
+    font-size: 2.5vh;
+    text-align: center;
+    align-self: center;
+    color: #510CFF;
+    width: 80%; }
+    .benefit_box .ben_text strong {
+      font-weight: bold; }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .benefit_box .ben_text {
+        font-size: 4vh; } }
 
-/* line 116, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .ben_number {
   position: relative;
   background-color: #510CFF;
   border-radius: inherit;
   height: 103%;
   width: 20%;
-  top: -1px;
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 116, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .ben_number {
-    height: 105%;
-  }
-}
-
-/* line 128, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.ben_number.right {
-  left: 1px;
-}
-
-/* line 132, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.ben_number.left {
-  left: -1px;
-}
-
-/* line 136, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.ben_number .digit {
-  font-weight: bold;
-  font-size: 36px;
-  text-align: center;
-  color: white;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 136, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  top: -1px; }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .ben_number {
+      height: 105%; } }
+  .ben_number.right {
+    left: 1px; }
+  .ben_number.left {
+    left: -1px; }
   .ben_number .digit {
-    font-size: 24px;
-  }
-}
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .ben_number .digit {
+        font-size: 24px; } }
 
-/* line 151, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .proceed_button {
   position: absolute;
   top: 85vh;
@@ -408,274 +259,170 @@ body {
   margin: auto;
   background: #DA01FF;
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-}
-
-/* line 164, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.proceed_button p {
-  color: white;
-  font-weight: bold;
-  font-size: 3vh;
-  text-align: center;
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 164, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  border-radius: 5px; }
   .proceed_button p {
-    font-size: 4vh;
-  }
-}
+    color: white;
+    font-weight: bold;
+    font-size: 3vh;
+    text-align: center; }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .proceed_button p {
+        font-size: 4vh; } }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .proceed_button {
+      display: none; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .proceed_button {
+      width: 30vw; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 151, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .proceed_button {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 151, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .proceed_button {
-    width: 30vw;
-  }
-}
-
-/* line 184, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .instruction_head {
   color: #3D39FF;
   font-weight: bold;
   font-size: 4vh;
-  text-align: center;
-}
+  text-align: center; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .instruction_head {
+      font-size: 4vh; } }
+  @media screen and (min-width: 640px) and (min-height: 920px) {
+    .instruction_head {
+      font-size: 3vh; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .instruction_head {
+      font-size: 5vh; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 184, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .instruction_head {
-    font-size: 4vh;
-  }
-}
-
-@media screen and (min-width: 640px) and (min-height: 920px) {
-  /* line 184, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .instruction_head {
-    font-size: 3vh;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 184, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .instruction_head {
-    font-size: 5vh;
-  }
-}
-
-/* line 203, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .inst_step {
   font-size: 3vh;
   color: #3D39FF;
   width: 90%;
-  margin: auto;
-}
+  margin: auto; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .inst_step {
+      font-size: 2.5vh; } }
+  @media screen and (min-width: 640px) and (min-height: 920px) {
+    .inst_step {
+      font-size: 2vh; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .inst_step {
+      font-size: 4vh; } }
+  .inst_step strong {
+    color: #DA01FF; }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 203, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .inst_step {
-    font-size: 2.5vh;
-  }
-}
-
-@media screen and (min-width: 640px) and (min-height: 920px) {
-  /* line 203, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .inst_step {
-    font-size: 2vh;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 203, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .inst_step {
-    font-size: 4vh;
-  }
-}
-
-/* line 221, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.inst_step strong {
-  color: #DA01FF;
-}
-
-/* line 226, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .inst_list {
   margin: 0 auto;
   height: 75%;
   width: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-}
+  justify-content: space-around; }
 
-/* line 235, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_buttons_wrap {
   width: 90vw;
   display: flex;
-  justify-content: space-around;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 235, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .collage_buttons_wrap {
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 235, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .collage_buttons_wrap {
-    flex-direction: column-reverse;
-    height: 50%;
-    width: auto;
-  }
-}
-
-/* line 250, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.collage_buttons_wrap button {
-  height: 7.5vh;
-  width: 40vw;
-  border-radius: 5px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 3vh;
-  font-weight: bold;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 250, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
+  justify-content: space-around; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .collage_buttons_wrap {
+      width: 50%; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .collage_buttons_wrap {
+      flex-direction: column-reverse;
+      height: 50%;
+      width: auto; } }
   .collage_buttons_wrap button {
-    width: 40%;
-    min-width: 150px;
-    font-size: 2.5vh;
-  }
-}
+    height: 7.5vh;
+    width: 40vw;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 3vh;
+    font-weight: bold; }
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      .collage_buttons_wrap button {
+        width: 40%;
+        min-width: 150px;
+        font-size: 2.5vh; } }
+    @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+      .collage_buttons_wrap button {
+        width: auto; } }
 
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 250, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .collage_buttons_wrap button {
-    width: auto;
-  }
-}
-
-/* line 271, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .reset_button {
   color: #510CFF;
   background-color: white;
-  border: 1px solid #510CFF;
-}
+  border: 1px solid #510CFF; }
 
-/* line 277, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .instructions_button {
   border: none;
   color: white;
-  background-color: #510CFF;
-}
+  background-color: #510CFF; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .instructions_button {
+      display: none; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 277, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .instructions_button {
-    display: none;
-  }
-}
-
-/* line 287, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_main_frame {
   position: relative;
   background-color: rgba(81, 12, 255, 0.25);
   display: flex;
   overflow: hidden;
-  overscroll-behavior-y: contain;
-}
+  overscroll-behavior-y: contain; }
 
-/* line 295, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .bot_buttons_wrapper {
   display: flex;
   height: 10vh;
   width: 60vw;
   border: 1px solid #510CFF;
-  border-radius: 5px;
-}
+  border-radius: 5px; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .bot_buttons_wrapper {
+      width: 40%;
+      min-width: 250px;
+      height: 7%;
+      margin: 0; } }
+  @media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
+    .bot_buttons_wrapper {
+      min-width: 15vw;
+      width: auto; } }
+  .bot_buttons_wrapper .create_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 5px;
+    color: #DA01FF;
+    width: 50%;
+    height: 100%;
+    font-size: 3vh;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-right: 1px solid #510CFF;
+    background-color: rgba(255, 255, 255, 0); }
+  .bot_buttons_wrapper .aspect_numbers {
+    border: none;
+    border-radius: 5px;
+    color: #510CFF;
+    background-color: rgba(255, 255, 255, 0);
+    margin: auto;
+    height: 100%;
+    font-weight: bold;
+    font-size: 4vh;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 295, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .bot_buttons_wrapper {
-    width: 40%;
-    min-width: 250px;
-    height: 7%;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 639px) and (orientation: landscape), screen and (max-height: 639px) and (orientation: landscape) {
-  /* line 295, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-  .bot_buttons_wrapper {
-    min-width: 15vw;
-    width: auto;
-  }
-}
-
-/* line 314, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.bot_buttons_wrapper .create_button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 5px;
-  color: #DA01FF;
-  width: 50%;
-  height: 100%;
-  font-size: 3vh;
-  text-align: center;
-  font-weight: bold;
-  border: none;
-  border-right: 1px solid #510CFF;
-  background-color: rgba(255, 255, 255, 0);
-}
-
-/* line 331, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.bot_buttons_wrapper .aspect_numbers {
-  border: none;
-  border-radius: 5px;
-  color: #510CFF;
-  background-color: rgba(255, 255, 255, 0);
-  margin: auto;
-  height: 100%;
-  font-weight: bold;
-  font-size: 4vh;
-  text-align: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-/* line 347, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .collage_frame {
   animation: appear 0.5s;
-  cursor: crosshair;
-}
+  cursor: crosshair; }
+  .collage_frame img {
+    width: 100%;
+    height: 100%;
+    animation: 1s ease-in-out 0s 1 paused appear; }
 
-/* line 351, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
-.collage_frame img {
-  width: 100%;
-  height: 100%;
-  animation: 1s ease-in-out 0s 1 paused appear;
-}
-
-/* line 358, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .finger_icon {
   display: none;
   position: absolute;
   width: 32px;
   height: 32px;
-  opacity: 0;
-}
+  opacity: 0; }
 
-/* line 366, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .message {
   position: absolute;
   height: 20vh;
@@ -690,10 +437,8 @@ body {
   border-radius: 10px;
   opacity: 0;
   font-size: 4vh;
-  padding: 10px;
-}
+  padding: 10px; }
 
-/* line 384, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -702,10 +447,8 @@ body {
   padding: 0;
   position: absolute !important;
   white-space: nowrap;
-  width: 1px;
-}
+  width: 1px; }
 
-/* line 395, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 [type="file"] + label {
   position: absolute;
   background-color: #3D39FF;
@@ -717,145 +460,86 @@ body {
   height: 30px;
   margin: auto;
   text-align: center;
-  vertical-align: middle;
   line-height: 30px;
   font-size: 30px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
-}
+  opacity: 0; }
 
-/* line 415, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader_wrapper {
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-}
+  transform: translate(-50%, -50%); }
 
-/* line 423, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_components.scss */
 .loader {
   border: 4px solid #3D39FF;
   border-top: 4px solid #DA01FF;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  animation: spin 1s linear infinite;
-}
+  animation: spin 1s linear infinite; }
 
-/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .dot_line {
   position: absolute;
-  z-index: -1;
-}
-
-/* line 5, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-.dot_line.vert {
-  top: 0%;
-  height: 100vh;
-}
-
-/* line 9, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-.dot_line.vert.left {
-  left: 10%;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 9, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-  .dot_line.vert.left {
-    display: none;
-  }
-}
-
-/* line 17, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-.dot_line.vert.right {
-  right: 10%;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 17, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-  .dot_line.vert.right {
-    left: 320px;
-  }
-}
-
-/* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-.dot_line.hor {
-  left: 0;
-  width: 100vw;
-}
-
-/* line 30, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-.dot_line.hor.up {
-  top: 22vh;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 26, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
+  z-index: -1; }
+  .dot_line.vert {
+    top: 0%;
+    height: 100vh; }
+    .dot_line.vert.left {
+      left: 10%; }
+      @media screen and (min-width: 640px) and (min-height: 640px) {
+        .dot_line.vert.left {
+          display: none; } }
+    .dot_line.vert.right {
+      right: 10%; }
+      @media screen and (min-width: 640px) and (min-height: 640px) {
+        .dot_line.vert.right {
+          left: 320px; } }
   .dot_line.hor {
-    display: none;
-  }
-}
+    left: 0;
+    width: 100vw; }
+    .dot_line.hor.up {
+      top: 22vh; }
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      .dot_line.hor {
+        display: none; } }
 
-/* line 44, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .vert_arrow {
   width: 15%;
   align-self: flex-end;
-  height: 200%;
-}
+  height: 200%; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .vert_arrow {
+      width: 10%;
+      margin-right: 10%; } }
 
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 44, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
-  .vert_arrow {
-    width: 10%;
-    margin-right: 10%;
-  }
-}
-
-/* line 55, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_esthetics.scss */
 .hor_arrow {
-  align-self: flex-end;
-}
+  align-self: flex-end; }
 
-/* line 1, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_animations.scss */
 .to_slide_down {
-  top: 37vh;
-}
+  top: 37vh; }
 
-/* line 5, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_animations.scss */
 .to_shrink {
   height: 12%;
   width: 80%;
-  margin: 5vh 0;
-}
-
-@media screen and (min-width: 640px) and (min-height: 640px) {
-  /* line 5, C:/Users/alnet/Documents/Collage/Collage/sass_styles/_animations.scss */
-  .to_shrink {
-    height: 15%;
-    margin: 0;
-    width: 100%;
-  }
-}
+  margin: 5vh 0; }
+  @media screen and (min-width: 640px) and (min-height: 640px) {
+    .to_shrink {
+      height: 15%;
+      margin: 0;
+      width: 100%; } }
 
 @keyframes appear {
   0% {
-    opacity: 0;
-  }
+    opacity: 0; }
   100% {
-    opacity: 1;
-  }
-}
+    opacity: 1; } }
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
-  }
+    transform: rotate(0deg); }
   100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*# sourceMappingURL=../styles/main_styles.map */
+    transform: rotate(360deg); } }

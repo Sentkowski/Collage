@@ -26,6 +26,6 @@ $taller: "screen and (min-width: 640px) and (min-height: 920px)";
 $phoneLandscape: "screen and (max-width: 639px) and (orientation:landscape), screen and (max-height: 639px) and (orientation:landscape)";
 
 @import 'sections';
-@import 'components';
+@import 'elements';
 @import 'esthetics';
 @import 'animations';
